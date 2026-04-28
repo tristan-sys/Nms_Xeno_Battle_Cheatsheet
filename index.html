@@ -3,258 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Xeno Arena Guide</title>
-<style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: system-ui, sans-serif;
-    background: #f7f7f8;
-    color: #222;
-    font-size: 15px;
-    line-height: 1.6;
-  }
-
-  header {
-    padding: 28px 24px 20px;
-    border-bottom: 1px solid #e2e2e2;
-    background: #ffffff;
-  }
-
-  header h1 {
-    font-size: 22px;
-    font-weight: 600;
-    color: #111;
-  }
-
-  header p {
-    color: #777;
-    font-size: 13px;
-    margin-top: 4px;
-  }
-
-  nav {
-    display: flex;
-    overflow-x: auto;
-    border-bottom: 1px solid #e2e2e2;
-    background: #ffffff;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    scrollbar-width: none;
-  }
-
-  nav::-webkit-scrollbar { display: none; }
-
-  nav button {
-    background: none;
-    border: none;
-    border-bottom: 2px solid transparent;
-    color: #666;
-    cursor: pointer;
-    font-size: 13px;
-    padding: 12px 18px;
-    white-space: nowrap;
-    transition: all 0.15s;
-  }
-
-  nav button:hover { color: #222; }
-
-  nav button.active {
-    color: #111;
-    border-bottom-color: #111;
-  }
-
-  main {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 32px 20px 60px;
-  }
-
-  .tab { display: none; }
-  .tab.active { display: block; }
-
-  h2 {
-    font-size: 18px;
-    font-weight: 600;
-    color: #111;
-    margin-bottom: 4px;
-  }
-
-  .subtitle {
-    color: #777;
-    font-size: 13px;
-    margin-bottom: 24px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid #e5e5e5;
-  }
-
-  h3 {
-    font-size: 12px;
-    font-weight: 600;
-    color: #888;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin: 28px 0 12px;
-  }
-
-  p { color: #444; margin-bottom: 10px; }
-  strong { color: #111; }
-
-  .card {
-    background: #ffffff;
-    border: 1px solid #e3e3e3;
-    border-radius: 10px;
-    padding: 16px 18px;
-    margin-bottom: 10px;
-  }
-
-  .card-title {
-    font-size: 13px;
-    font-weight: 600;
-    color: #111;
-    margin-bottom: 6px;
-  }
-
-  .grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-
-  @media (max-width: 600px) {
-    .grid { grid-template-columns: 1fr; }
-  }
-
-  .step {
-    display: flex;
-    gap: 14px;
-    padding: 10px 0;
-    border-bottom: 1px solid #eee;
-  }
-
-  .step::before {
-    color: #bbb;
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
-    margin-bottom: 20px;
-  }
-
-  th {
-    text-align: left;
-    color: #777;
-    font-size: 11px;
-    text-transform: uppercase;
-    padding: 8px 10px;
-    border-bottom: 1px solid #e2e2e2;
-  }
-
-  td {
-    padding: 9px 10px;
-    border-bottom: 1px solid #f0f0f0;
-    color: #444;
-  }
-
-  tr:hover td { background: #f5f5f5; }
-
-  .badge {
-    display: inline-block;
-    font-size: 12px;
-    padding: 2px 8px;
-    border-radius: 6px;
-    background: #f0f0f0;
-    border: none;
-    margin: 1px;
-  }
-
-  /* softened affinity colors */
-  .fire { background: #ffe5e0; color: #c94a2f; }
-  .frost { background: #e6f4ff; color: #3a7ca5; }
-  .radioactive { background: #eefadf; color: #6c8c2f; }
-  .toxic { background: #f3e8ff; color: #7b4db2; }
-  .tropical { background: #e6f7ef; color: #2e8b57; }
-  .mechanical { background: #fff2e0; color: #b8792c; }
-  .anomalous { background: #ffe6f2; color: #b23a7a; }
-  .desert { background: #fff8e1; color: #a68a2a; }
-
-  .chain {
-    background: #ffffff;
-    border: 1px solid #e3e3e3;
-    border-radius: 10px;
-    padding: 14px 16px;
-    margin-bottom: 10px;
-    font-size: 13px;
-  }
-
-  .search-wrap input {
-    width: 100%;
-    background: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    color: #222;
-    font-size: 14px;
-    padding: 10px 14px;
-  }
-
-  .search-wrap input::placeholder { color: #aaa; }
-
-  .move-name { color: #111; }
-  .move-desc { color: #666; }
-
-  .analyze-btn {
-    width: 100%;
-    background: #111;
-    border: none;
-    border-radius: 8px;
-    color: #fff;
-    font-size: 14px;
-    font-weight: 600;
-    padding: 14px;
-    cursor: pointer;
-    margin-top: 14px;
-  }
-
-  .analyze-btn:hover { background: #333; }
-
-  .reco-box {
-    background: #ffffff;
-    border: 1px solid #e3e3e3;
-    border-radius: 10px;
-    padding: 16px;
-    font-size: 14px;
-    color: #444;
-  }
-
-  .warn {
-    background: #fff4e5;
-    border: 1px solid #f0d2a8;
-    color: #9a6b2f;
-  }
-
-  .tip {
-    background: #eef7f0;
-    border: 1px solid #cfe6d4;
-    color: #2e7d32;
-  }
-</style>
+<title>NMS Xeno Arena Wiki</title>
 <style>
   :root {
     --bg: #edf1ee;
     --surface: rgba(255, 255, 255, 0.82);
     --surface-strong: #ffffff;
-    --surface-soft: #f6f8f7;
+    --surface-soft: #f5f8f6;
     --text: #18201c;
-    --muted: #66716c;
+    --muted: #62706a;
     --line: rgba(24, 32, 28, 0.1);
     --line-strong: rgba(24, 32, 28, 0.18);
     --accent: #2f6e62;
+    --accent-strong: #1f5048;
     --accent-soft: rgba(47, 110, 98, 0.12);
-    --shadow: 0 10px 30px rgba(24, 32, 28, 0.08);
-    --radius: 8px;
+    --shadow: 0 18px 48px rgba(24, 32, 28, 0.08);
+    --radius: 10px;
+    --radius-lg: 18px;
+    --max-width: 1220px;
   }
 
   * {
@@ -268,757 +34,1731 @@
   }
 
   body {
-    font-family: "Segoe UI", "Avenir Next", sans-serif;
-    background:
-      radial-gradient(circle at top left, rgba(47, 110, 98, 0.12), transparent 28%),
-      linear-gradient(180deg, #f8fbf9 0%, var(--bg) 100%);
-    color: var(--text);
-    font-size: 15px;
-    line-height: 1.65;
     min-height: 100vh;
+    font-family: "Segoe UI", "Avenir Next", sans-serif;
+    color: var(--text);
+    background:
+      radial-gradient(circle at top left, rgba(47, 110, 98, 0.12), transparent 26%),
+      linear-gradient(180deg, #f8fbf9 0%, var(--bg) 100%);
+    line-height: 1.65;
   }
 
-  header {
-    max-width: 940px;
-    margin: 24px auto 0;
-    padding: 28px 22px 18px;
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(24, 32, 28, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(24, 32, 28, 0.035) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.65), transparent 88%);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .page {
+    width: min(calc(100% - 32px), var(--max-width));
+    margin: 22px auto 72px;
+  }
+
+  .hero {
     border: 1px solid var(--line);
-    border-radius: 16px 16px 0 0;
-    border-bottom: none;
+    border-radius: var(--radius-lg);
+    padding: 34px 34px 28px;
     background: var(--surface);
-    backdrop-filter: blur(14px);
     box-shadow: var(--shadow);
+    backdrop-filter: blur(12px);
   }
 
-  header h1 {
-    font-size: clamp(28px, 4vw, 40px);
+  .eyebrow {
+    font-size: 11px;
     font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: Georgia, "Times New Roman", serif;
     letter-spacing: 0;
     color: var(--text);
   }
 
-  header p {
-    color: var(--muted);
-    font-size: 14px;
-    margin-top: 8px;
-    max-width: 640px;
+  h1 {
+    font-size: clamp(34px, 5vw, 54px);
+    line-height: 1.04;
+    max-width: 760px;
   }
 
-  nav {
+  .hero-copy {
+    max-width: 760px;
+    margin-top: 14px;
+    color: #31403a;
+    font-size: 17px;
+  }
+
+  .hero-meta {
     display: flex;
-    gap: 6px;
-    overflow-x: auto;
-    max-width: 940px;
-    margin: 0 auto;
-    padding: 0 14px 10px;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .hero-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 12px;
     border: 1px solid var(--line);
-    border-top: none;
-    border-radius: 0 0 16px 16px;
-    background: var(--surface);
-    backdrop-filter: blur(14px);
-    position: sticky;
-    top: 10px;
-    z-index: 10;
-    box-shadow: var(--shadow);
-    scrollbar-width: none;
-  }
-
-  nav::-webkit-scrollbar {
-    display: none;
-  }
-
-  nav button {
-    background: transparent;
-    border: 1px solid transparent;
     border-radius: 999px;
-    color: var(--muted);
-    cursor: pointer;
+    background: rgba(255, 255, 255, 0.72);
+    color: var(--accent-strong);
     font-size: 13px;
     font-weight: 600;
-    padding: 10px 14px;
-    white-space: nowrap;
-    transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
   }
 
-  nav button:hover {
-    color: var(--text);
-    background: rgba(255, 255, 255, 0.7);
-    border-color: var(--line);
-    transform: translateY(-1px);
+  .hero-link:hover {
+    border-color: rgba(47, 110, 98, 0.24);
+    background: #ffffff;
   }
 
-  nav button.active {
-    color: var(--accent);
-    background: var(--accent-soft);
-    border-color: rgba(47, 110, 98, 0.18);
+  .metric-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 24px;
   }
 
-  main {
-    max-width: 940px;
-    margin: 0 auto;
-    padding: 24px 18px 72px;
-  }
-
-  .tab {
-    display: none;
-  }
-
-  .tab.active {
-    display: block;
-    animation: fade-up 0.28s ease;
-  }
-
-  h2 {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 6px;
-  }
-
-  .subtitle {
-    color: var(--muted);
-    font-size: 14px;
-    margin-bottom: 28px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--line);
-  }
-
-  h3 {
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    margin: 32px 0 14px;
-  }
-
-  p {
-    color: #31403a;
-    margin-bottom: 12px;
-  }
-
-  strong {
-    color: var(--text);
-  }
-
-  .card,
-  .chain,
-  .reco-box {
-    background: var(--surface);
+  .metric {
+    padding: 14px 16px;
     border: 1px solid var(--line);
     border-radius: var(--radius);
-    padding: 16px;
-    margin-bottom: 12px;
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset;
+    background: rgba(255, 255, 255, 0.66);
+  }
+
+  .metric-value {
+    display: block;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--accent-strong);
+  }
+
+  .metric-label {
+    display: block;
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 30px;
+    margin-top: 24px;
+  }
+
+  .wiki-nav {
+    position: relative;
+  }
+
+  .wiki-nav-inner {
+    position: sticky;
+    top: 22px;
+    padding: 18px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.72);
     backdrop-filter: blur(10px);
   }
 
-  .card-title {
-    font-size: 14px;
+  .wiki-nav-title {
+    font-size: 12px;
     font-weight: 700;
-    color: var(--text);
-    margin-bottom: 6px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
   }
 
-  .grid {
+  .wiki-nav-links {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: 6px;
   }
 
-  .step {
+  .wiki-nav a {
+    padding: 8px 10px;
+    border-radius: 8px;
+    color: #34423d;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .wiki-nav a:hover,
+  .wiki-nav a.active {
+    background: var(--accent-soft);
+    color: var(--accent-strong);
+  }
+
+  .wiki-nav-note {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .content section + section {
+    margin-top: 60px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+  }
+
+  .section-head {
+    max-width: 760px;
+    margin-bottom: 22px;
+  }
+
+  h2 {
+    font-size: clamp(28px, 3vw, 36px);
+    line-height: 1.1;
+  }
+
+  .section-copy {
+    margin-top: 10px;
+    color: #3c4c46;
+    font-size: 16px;
+  }
+
+  .panel-grid {
     display: grid;
-    grid-template-columns: 18px 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .panel-grid.three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .panel {
+    padding: 18px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.78) inset;
+  }
+
+  .panel h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+
+  .panel p,
+  .panel li,
+  .callout p {
+    color: #3b4a45;
+    font-size: 15px;
+  }
+
+  .callout {
+    padding: 16px 18px;
+    border: 1px solid var(--line);
+    border-left-width: 3px;
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.7);
+    color: #3b4a45;
+    margin-bottom: 18px;
+  }
+
+  .callout.tip {
+    border-left-color: #2f6e62;
+    background: rgba(47, 110, 98, 0.08);
+  }
+
+  .callout.warn {
+    border-left-color: #a56b22;
+    background: rgba(223, 171, 97, 0.14);
+  }
+
+  .steps {
+    display: grid;
+    gap: 10px;
+    list-style: none;
+  }
+
+  .steps li {
+    display: grid;
+    grid-template-columns: 26px 1fr;
     gap: 12px;
     align-items: start;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--line);
   }
 
-  .step:last-child {
-    border-bottom: none;
-  }
-
-  .step::before {
-    content: "";
-    width: 8px;
-    height: 8px;
-    margin-top: 8px;
+  .step-index {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
     border-radius: 999px;
-    background: var(--accent);
-    opacity: 0.7;
+    background: var(--accent-soft);
+    color: var(--accent-strong);
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .source-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .source-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.7);
+    color: var(--accent-strong);
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .affinity-table-wrap,
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.82);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.78) inset;
   }
 
   table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 14px;
-    margin-bottom: 22px;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: var(--shadow);
+    min-width: 760px;
   }
 
-  th {
-    text-align: left;
-    color: var(--muted);
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    padding: 12px 14px;
-    border-bottom: 1px solid var(--line);
-    background: rgba(246, 248, 247, 0.9);
-  }
-
+  th,
   td {
-    padding: 12px 14px;
-    border-bottom: 1px solid rgba(24, 32, 28, 0.06);
-    color: #31403a;
+    padding: 13px 14px;
+    border-bottom: 1px solid rgba(24, 32, 28, 0.08);
+    text-align: left;
     vertical-align: top;
   }
 
-  tr:last-child td {
+  th {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: rgba(245, 248, 246, 0.94);
+  }
+
+  tbody tr:last-child td {
     border-bottom: none;
   }
 
-  tr:hover td {
+  tbody tr:hover td {
     background: rgba(47, 110, 98, 0.04);
   }
 
-  .badge {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 600;
-    padding: 4px 8px;
-    border-radius: 999px;
-    background: #eef2f0;
-    color: #405049;
+  .chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .chip,
+  .tag,
+  .worth,
+  .status-chip,
+  .category-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 9px;
     border: 1px solid rgba(24, 32, 28, 0.08);
-    margin: 2px 4px 2px 0;
-  }
-
-  .fire { background: #ffe7df; color: #aa4f33; }
-  .frost { background: #e4f1ff; color: #356e94; }
-  .radioactive { background: #edf6dd; color: #5d7f26; }
-  .toxic { background: #f3e7ff; color: #7447a0; }
-  .tropical { background: #e6f5eb; color: #2f7a55; }
-  .mechanical { background: #fff1de; color: #9f6a20; }
-  .anomalous { background: #ffe5f0; color: #a83a70; }
-  .desert { background: #fff5d8; color: #98781f; }
-
-  .search-wrap input {
-    width: 100%;
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid var(--line-strong);
-    border-radius: var(--radius);
-    color: var(--text);
-    font-size: 14px;
-    padding: 12px 14px;
-    outline: none;
-    transition: border-color 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
-  }
-
-  .search-wrap input::placeholder {
-    color: #8b9691;
-  }
-
-  .search-wrap input:focus {
-    border-color: rgba(47, 110, 98, 0.4);
-    box-shadow: 0 0 0 4px rgba(47, 110, 98, 0.1);
-    background: #ffffff;
-  }
-
-  .move-name {
-    color: var(--text);
+    border-radius: 999px;
+    font-size: 12px;
     font-weight: 600;
+    line-height: 1.2;
+    white-space: nowrap;
   }
 
-  .move-desc {
+  .chip {
+    background: #eef2f0;
+    color: #3c4c46;
+  }
+
+  .aff-fire { background: #ffe7df; color: #aa4f33; }
+  .aff-frost { background: #e4f1ff; color: #356e94; }
+  .aff-radioactive { background: #edf6dd; color: #5d7f26; }
+  .aff-toxic { background: #f3e7ff; color: #7447a0; }
+  .aff-tropical { background: #e6f5eb; color: #2f7a55; }
+  .aff-mechanical { background: #fff1de; color: #9f6a20; }
+  .aff-anomalous { background: #ffe5f0; color: #a83a70; }
+  .aff-desert { background: #fff5d8; color: #98781f; }
+
+  .loop-grid {
+    display: grid;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .loop-line {
+    padding: 14px 16px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.75);
+    color: #42514b;
+  }
+
+  .loop-seq {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .muted {
     color: var(--muted);
   }
 
-  .analyze-btn {
-    width: 100%;
-    background: var(--accent);
-    border: none;
+  .tier-list {
+    display: grid;
+    gap: 10px;
+  }
+
+  .tier-item {
+    display: grid;
+    grid-template-columns: 54px 1fr;
+    gap: 12px;
+    align-items: start;
+    padding: 14px 16px;
+    border: 1px solid var(--line);
     border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.76);
+  }
+
+  .tier-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    font-size: 19px;
+    font-weight: 700;
+    background: var(--surface-soft);
+    color: var(--accent-strong);
+  }
+
+  .filters {
+    display: grid;
+    grid-template-columns: minmax(220px, 2.3fr) repeat(4, minmax(120px, 1fr)) auto;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .field {
+    display: grid;
+    gap: 6px;
+  }
+
+  .field-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  input,
+  select,
+  button {
+    font: inherit;
+  }
+
+  input,
+  select {
+    width: 100%;
+    min-height: 44px;
+    padding: 11px 13px;
+    border: 1px solid var(--line-strong);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--text);
+    outline: none;
+  }
+
+  input:focus,
+  select:focus {
+    border-color: rgba(47, 110, 98, 0.35);
+    box-shadow: 0 0 0 4px rgba(47, 110, 98, 0.1);
+  }
+
+  .ghost-btn,
+  .primary-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 11px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--line-strong);
+    cursor: pointer;
+  }
+
+  .ghost-btn {
+    background: rgba(255, 255, 255, 0.72);
+    color: var(--text);
+  }
+
+  .primary-btn {
+    background: var(--accent);
+    border-color: transparent;
     color: #ffffff;
+    font-weight: 700;
+    box-shadow: 0 10px 24px rgba(47, 110, 98, 0.18);
+  }
+
+  .ghost-btn:hover {
+    background: #ffffff;
+  }
+
+  .primary-btn:hover {
+    filter: brightness(1.03);
+    transform: translateY(-1px);
+  }
+
+  .results-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 14px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .move-name {
     font-size: 14px;
     font-weight: 700;
-    padding: 14px;
-    cursor: pointer;
-    margin-top: 14px;
-    box-shadow: 0 10px 24px rgba(47, 110, 98, 0.22);
-    transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+    color: var(--text);
   }
 
-  .analyze-btn:hover {
-    transform: translateY(-1px);
-    filter: brightness(1.03);
-    box-shadow: 0 14px 28px rgba(47, 110, 98, 0.24);
+  .id-stack {
+    display: grid;
+    gap: 6px;
   }
 
-  .warn {
-    background: #fff3df;
-    border-color: #efd4a2;
-    color: #8c6427;
+  .small-note {
+    font-size: 13px;
+    color: var(--muted);
   }
 
-  .tip {
-    background: #eaf6ee;
-    border-color: #c9e2d1;
+  .category-chip {
+    background: #eef2f0;
+    color: #405049;
+  }
+
+  .worth-0 { background: #eef1f0; color: #67756f; }
+  .worth-1 { background: #f3ece6; color: #8c6641; }
+  .worth-2 { background: #f8f0df; color: #916a1f; }
+  .worth-3 { background: #e8f4ee; color: #2d6b42; }
+  .worth-4 { background: #dff2f1; color: #24635b; }
+  .worth-5 { background: #dfe9ff; color: #355998; }
+
+  .status-live {
+    background: #e8f4ee;
     color: #2d6b42;
   }
 
-  @keyframes fade-up {
-    from {
-      opacity: 0;
-      transform: translateY(8px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .status-files {
+    background: #fff3df;
+    color: #8c6427;
   }
 
-  @media (max-width: 700px) {
-    header {
-      margin-top: 14px;
-      padding: 22px 18px 16px;
-      border-radius: 14px 14px 0 0;
-    }
+  .slot-grid,
+  .featured-grid,
+  .creature-grid,
+  .breeding-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
 
-    nav {
-      top: 8px;
-      padding: 0 10px 10px;
-      border-radius: 0 0 14px 14px;
-    }
+  .slot-card,
+  .featured-card,
+  .creature-card,
+  .trait-card {
+    padding: 18px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.8);
+  }
 
-    main {
-      padding: 20px 14px 56px;
-    }
+  .slot-card h3,
+  .featured-card h3,
+  .creature-card h3,
+  .trait-card h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
 
-    .grid {
+  .slot-meta,
+  .featured-meta,
+  .creature-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+
+  .mini-list {
+    display: grid;
+    gap: 7px;
+    margin-top: 12px;
+  }
+
+  .mini-list-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 7px;
+    border-top: 1px solid rgba(24, 32, 28, 0.08);
+    font-size: 14px;
+  }
+
+  .mini-list-item strong {
+    font-weight: 700;
+  }
+
+  .trait-card ul {
+    list-style: none;
+    display: grid;
+    gap: 6px;
+    margin-top: 12px;
+  }
+
+  .trait-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 14px;
+  }
+
+  .trait-box {
+    padding: 14px;
+    border-radius: 10px;
+    background: var(--surface-soft);
+    border: 1px solid rgba(24, 32, 28, 0.06);
+  }
+
+  .trait-box h4 {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .team-tool {
+    padding: 18px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.82);
+  }
+
+  .team-controls {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+    gap: 12px;
+    align-items: end;
+  }
+
+  .team-output {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+  }
+
+  .team-lineup,
+  .team-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .team-result-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 14px;
+  }
+
+  .team-result-card {
+    padding: 16px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.7);
+  }
+
+  .team-score {
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--accent-strong);
+  }
+
+  .empty-state {
+    padding: 26px 18px;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  @media (max-width: 1100px) {
+    .layout {
       grid-template-columns: 1fr;
     }
 
-    h2 {
-      font-size: 21px;
+    .wiki-nav-inner {
+      position: static;
+    }
+
+    .wiki-nav-links {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .panel-grid.three,
+    .slot-grid,
+    .featured-grid,
+    .creature-grid,
+    .breeding-grid,
+    .metric-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 820px) {
+    .page {
+      width: min(calc(100% - 20px), var(--max-width));
+      margin-top: 10px;
+    }
+
+    .hero {
+      padding: 24px 20px 20px;
+    }
+
+    .filters,
+    .team-controls,
+    .panel-grid,
+    .panel-grid.three,
+    .slot-grid,
+    .featured-grid,
+    .creature-grid,
+    .breeding-grid,
+    .metric-grid,
+    .team-result-grid,
+    .trait-columns,
+    .wiki-nav-links {
+      grid-template-columns: 1fr;
+    }
+
+    .content section + section {
+      margin-top: 48px;
+    }
+
+    .hero-copy,
+    .section-copy {
+      font-size: 15px;
     }
   }
 </style>
 </head>
 <body>
-
-<header>
-  <h1>Xeno Arena Guide</h1>
-  <p>No Man's Sky — Update 6.3</p>
-</header>
-
-<nav>
-  <button class="active" onclick="tab('battles',this)">How to Battle</button>
-  <button onclick="tab('affinities',this)">Affinities</button>
-  <button onclick="tab('stats',this)">Stats & Tiers</button>
-  <button onclick="tab('moves',this)">Move Catalog</button>
-  <button onclick="tab('breeding',this)">Breeding</button>
-  <button onclick="tab('team',this)">Team Builder</button>
-</nav>
-
-<main>
-
-<!-- HOW TO BATTLE -->
-<div id="tab-battles" class="tab active">
-  <h2>How Holo-Battles Work</h2>
-  <p class="subtitle">Rules, locations, and how a match plays out</p>
-
-  <h3>The Basics</h3>
-  <div class="grid">
-    <div class="card">
-      <div class="card-title">Format</div>
-      <p>3v3 turn-based. One active creature per side at a time. Knock out all 3 enemy creatures to win. Pets take no real damage — fully healed after every match.</p>
-    </div>
-    <div class="card">
-      <div class="card-title">Your Turn Options</div>
-      <p><strong>Use ability</strong> — pick 1 of 5 moves (powerful ones have cooldowns)<br><strong>Swap creature</strong> — switch to a teammate mid-battle<br><strong>Surrender</strong> — forfeit</p>
-    </div>
-    <div class="card">
-      <div class="card-title">Turn Order</div>
-      <p>The creature with the <strong>highest Agility</strong> acts first. Creatures can randomly <strong>dodge</strong>, land <strong>crits</strong>, or get <strong>bonus moves</strong>.</p>
-    </div>
-    <div class="card">
-      <div class="card-title">Before the Match</div>
-      <p>Pick your 3 creatures and order <strong>before the fight</strong>. You can inspect the opponent's team first — plan your counters around what you see.</p>
-    </div>
-  </div>
-
-  <h3>Battle Flow</h3>
-  <div class="card">
-    <div class="steps">
-      <div class="step"><p>Inspect the enemy team's affinities</p></div>
-      <div class="step"><p>Pick your 3 creatures and their starting order</p></div>
-      <div class="step"><p>Highest Agility creature goes first</p></div>
-      <div class="step"><p>Pick an ability — watch cooldowns on strong moves</p></div>
-      <div class="step"><p>Swap to a teammate if the matchup is bad</p></div>
-      <div class="step"><p>Last team standing wins</p></div>
-    </div>
-  </div>
-
-  <h3>Where to Find Arenas</h3>
-  <div class="card"><div class="card-title">🌀 Space Anomaly</div><p>Main hub. Talk to <strong>Iteration: Oceanus</strong> for the tutorial and the daily challenge (same for every player worldwide). Also where PvP multiplayer happens.</p></div>
-  <div class="card"><div class="card-title">🚀 Space Stations</div><p>Near mission and trade terminals. NPCs here are <strong>system champions</strong> — harder but give better nanite rewards.</p></div>
-  <div class="card"><div class="card-title">🏘 Settlements & Trade Outposts</div><p>Seating areas near NPC clusters. Easier opponents, great for leveling new creatures. Their teams are built from local planet fauna.</p></div>
-  <div class="card"><div class="card-title">🏗 Your Own Arena</div><p>Buildable at your base. Open it to other travellers, host tournaments, or challenge friends.</p></div>
-
-  <div class="tip">Daily tip: Oceanus resets every day. The puzzle is the same for all players — check the NMS community online if you're stuck.</div>
-</div>
-
-<!-- AFFINITIES -->
-<div id="tab-affinities" class="tab">
-  <h2>Affinity System</h2>
-  <p class="subtitle">Each creature's element is set by the biome of the planet it came from</p>
-
-  <div class="tip">Before each fight, inspect the enemy team. Deploy creatures that counter their affinity. You can also swap mid-battle to get a better matchup.</div>
-
-  <table>
-    <thead><tr><th>Affinity</th><th>Planet Biome</th><th>Beats</th><th>Loses To</th></tr></thead>
-    <tbody>
-      <tr><td><span class="badge fire">🔥 Fire</span></td><td>Volcanic / Hot</td><td><span class="badge frost">❄ Frost</span></td><td><span class="badge radioactive">☢ Radioactive</span></td></tr>
-      <tr><td><span class="badge frost">❄ Frost</span></td><td>Frozen / Icy</td><td><span class="badge desert">🏜 Desert</span></td><td><span class="badge fire">🔥 Fire</span></td></tr>
-      <tr><td><span class="badge radioactive">☢ Radioactive</span></td><td>Irradiated</td><td><span class="badge fire">🔥 Fire</span></td><td><span class="badge toxic">☠ Toxic</span></td></tr>
-      <tr><td><span class="badge toxic">☠ Toxic</span></td><td>Toxic / Poison</td><td><span class="badge tropical">🌿 Tropical</span></td><td><span class="badge radioactive">☢ Radioactive</span></td></tr>
-      <tr><td><span class="badge tropical">🌿 Tropical</span></td><td>Lush / Tropical</td><td><span class="badge mechanical">⚙ Mechanical</span></td><td><span class="badge toxic">☠ Toxic</span></td></tr>
-      <tr><td><span class="badge mechanical">⚙ Mechanical</span></td><td>Robotic creatures</td><td><span class="badge toxic">☠ Toxic</span></td><td><span class="badge anomalous">🌀 Anomalous</span></td></tr>
-      <tr><td><span class="badge anomalous">🌀 Anomalous</span></td><td>Exotic / Weird</td><td><span class="badge mechanical">⚙ Mechanical</span></td><td><span class="badge desert">🏜 Desert</span></td></tr>
-      <tr><td><span class="badge desert">🏜 Desert</span></td><td>Desert / Barren</td><td><span class="badge radioactive">☢ Radioactive</span></td><td><span class="badge frost">❄ Frost</span></td></tr>
-    </tbody>
-  </table>
-
-  <h3>The Two Loops</h3>
-  <p style="color:#666;font-size:13px;margin-bottom:10px">Arrow = beats. The 8 affinities form two separate chains.</p>
-  <div class="chain">
-    <span class="badge fire">🔥 Fire</span><span class="chain-arrow">→</span>
-    <span class="badge frost">❄ Frost</span><span class="chain-arrow">→</span>
-    <span class="badge desert">🏜 Desert</span><span class="chain-arrow">→</span>
-    <span class="badge radioactive">☢ Radioactive</span><span class="chain-arrow">→</span>
-    <span class="badge fire">🔥 Fire</span>
-  </div>
-  <div class="chain">
-    <span class="badge toxic">☠ Toxic</span><span class="chain-arrow">→</span>
-    <span class="badge tropical">🌿 Tropical</span><span class="chain-arrow">→</span>
-    <span class="badge mechanical">⚙ Mech</span><span class="chain-arrow">↔</span>
-    <span class="badge anomalous">🌀 Anomalous</span>
-    <span style="color:#555;font-size:12px;margin-left:6px">(these two counter each other)</span>
-  </div>
-</div>
-
-<!-- STATS & TIERS -->
-<div id="tab-stats" class="tab">
-  <h2>Stats & Tiers</h2>
-  <p class="subtitle">Understanding your creature's numbers and how to improve them</p>
-
-  <h3>The 3 Stats</h3>
-  <div class="card"><div class="card-title">⚔ Combat Effectiveness</div><p>Raw damage output. Controls how hard offensive abilities hit — attacks, DoTs, combos. Prioritize this for an aggressive playstyle.</p></div>
-  <div class="card"><div class="card-title">⚡ Agility</div><p>Does two things: determines <strong>who goes first</strong> each turn (highest goes first), and gives a chance for incoming attacks to <strong>miss</strong>. Fast creatures can dominate by acting first every round.</p></div>
-  <div class="card"><div class="card-title">❤ Health</div><p>How much damage the creature can take before being knocked out. Larger creatures tend to have more HP but are easier to target. Good for tank-style play.</p></div>
-  <div class="card"><div class="card-title">🧠 Personality & Size</div><p>Personality affects battle behavior (aggressive vs defensive decisions). Physical size affects durability and how easy the creature is to hit.</p></div>
-
-  <h3>Tier System</h3>
-  <div class="card">
-    <div class="tier-row"><span class="tier-letter s">S</span><div class="tier-info"><strong>Legendary.</strong> Best possible stats. Rare — found on uncommon biome planets. Worth investing all upgrade resources into.</div></div>
-    <div class="tier-row"><span class="tier-letter a">A</span><div class="tier-info"><strong>Excellent.</strong> Strong stats. Fully competitive, especially with type advantages. Can beat S-tier with good strategy.</div></div>
-    <div class="tier-row"><span class="tier-letter b">B</span><div class="tier-info"><strong>Solid.</strong> Good for most NPC fights. Will struggle against maxed S-tier opponents in PvP.</div></div>
-    <div class="tier-row"><span class="tier-letter c">C</span><div class="tier-info"><strong>Beginner.</strong> Starting point. Upgradeable through XP mutations and Retroviral Pellets.</div></div>
-  </div>
-  <div class="tip">You can't skip tiers — complete one before the next unlocks. Decide which creature to invest in before spending Retroviral Pellets.</div>
-
-  <h3>How to Upgrade</h3>
-  <div class="grid">
-    <div class="card"><div class="card-title">XP Mutations (Free)</div><p>Every battle gives XP. Accumulate enough to unlock mutations that boost: move-first chance, dodge rate, HP, and ability power.</p></div>
-    <div class="card"><div class="card-title">Retroviral Pellets (Fast)</div><p>Directly boosts a specific stat. Dropped occasionally from victories. <strong>Summon the creature first</strong> before using one — otherwise it gets wasted.</p></div>
-  </div>
-</div>
-
-<!-- MOVE CATALOG -->
-<div id="tab-moves" class="tab">
-  <h2>Move Catalog</h2>
-  <p class="subtitle">All move types from game data. Each creature gets 5 moves based on species & biome.</p>
-  <div class="search-wrap"><input type="text" placeholder="Search moves..." oninput="filterMoves(this.value)"></div>
-
-  <div class="move-section" id="ms-basic">
-    <div class="move-section-title">Basic Attacks</div>
-    <div class="move" data-search="basic attack normal"><span class="move-name">Basic Attack</span><span class="move-desc">Standard non-typed hit. No elemental advantage or penalty.</span></div>
-    <div class="move" data-search="affinity attack element own type"><span class="move-name">Affinity Attack</span><span class="move-desc">Uses the creature's own affinity for a typed hit. Gets the full damage bonus against weak opponents.</span></div>
-    <div class="move" data-search="typed fire frost radioactive toxic tropical mechanical anomalous desert element"><span class="move-name">Typed Attacks ×8</span><span class="move-desc">One dedicated attack per affinity. Each uses full type matchup rules.</span></div>
-    <div class="move" data-search="wild swing inaccurate miss low accuracy"><span class="move-name">Wild Swing</span><span class="move-desc">Lower hit chance, but both a normal and affinity version exist. Can catch cautious players off guard.</span></div>
-  </div>
-
-  <div class="move-section" id="ms-multi">
-    <div class="move-section-title">Multi-Hit & Scaling</div>
-    <div class="move" data-search="barrage triple 3 hit escalating shots"><span class="move-name">Barrage</span><span class="move-desc">Fires 3 affinity projectiles in one turn with escalating power (VeryLight → Light → Medium).</span></div>
-    <div class="move" data-search="ramp ramping stronger each use stack grow"><span class="move-name">Ramp Attack</span><span class="move-desc">Gets stronger every time you use it in a match. Starts weak — becomes devastating in long fights.</span></div>
-    <div class="move" data-search="speed agility scales fast slow enemy"><span class="move-name">Speed Strike ×2</span><span class="move-desc">Scales with Agility. One version powers up with your speed; the other hits harder the faster the enemy is.</span></div>
-    <div class="move" data-search="multi turn 3 round channel charge over time"><span class="move-name">Multi-Turn Attack</span><span class="move-desc">Channels over 3 turns with escalating damage (VeryLight → Medium → Heavy). Opponent can try to shield or interrupt.</span></div>
-  </div>
-
-  <div class="move-section" id="ms-chargeup">
-    <div class="move-section-title">Charge-Up Attacks</div>
-    <div class="move" data-search="charge up wait 1 turn big hit telegraph"><span class="move-name">Chargeup Strike</span><span class="move-desc">Spends one turn charging, then delivers a strong hit. Telegraphed — opponent knows it's coming.</span></div>
-    <div class="move" data-search="double charge 2 turns very heavy strongest nuke"><span class="move-name">Double Chargeup</span><span class="move-desc">Waits two full turns then fires a very heavy attack. Extremely telegraphed but potentially the hardest-hitting move in the game.</span></div>
-  </div>
-
-  <div class="move-section" id="ms-dot">
-    <div class="move-section-title">Damage Over Time & Traps</div>
-    <div class="move" data-search="dot bleed damage over time tick burn poison"><span class="move-name">Affinity DoT</span><span class="move-desc">Applies an elemental damage-over-time effect that ticks each turn for several rounds. Great vs. high-health tanks.</span></div>
-    <div class="move" data-search="bomb delayed explode after turns timer debuff"><span class="move-name">Bomb / Delay Attack</span><span class="move-desc">Plants a timed debuff that explodes for big damage after X turns. Forces opponent to choose: dispel it or eat the hit.</span></div>
-    <div class="move" data-search="dot bomb bleed explode combo both"><span class="move-name">DoT Bomb</span><span class="move-desc">Applies sustained ticking damage AND a delayed burst in one move.</span></div>
-    <div class="move" data-search="dont touch trap explodes dispel punish cleanse"><span class="move-name">Don't Touch (Trap)</span><span class="move-desc">Debuff that explodes if the enemy tries to dispel it. Hard counter to opponents running Cleanse moves.</span></div>
-    <div class="move" data-search="attack dot combo hit and bleed same turn"><span class="move-name">Attack + DoT Combo</span><span class="move-desc">Deals immediate damage AND applies a DoT in the same move. Both a normal and affinity version exist.</span></div>
-  </div>
-
-  <div class="move-section" id="ms-heals">
-    <div class="move-section-title">Heals & Shields</div>
-    <div class="move" data-search="heal instant restore hp self recover"><span class="move-name">Self Heal</span><span class="move-desc">Instantly restores a portion of your creature's HP. Simple and reliable.</span></div>
-    <div class="move" data-search="hot heal over time regenerate regen slow"><span class="move-name">Heal Over Time (HoT)</span><span class="move-desc">Regen effect that slowly heals over several turns. Better total healing than instant but spread out.</span></div>
-    <div class="move" data-search="delayed heal future turns plan ahead pre-heal"><span class="move-name">Delayed Heal</span><span class="move-desc">Sets up a heal that triggers after X turns. Pre-plan recovery before taking incoming hits.</span></div>
-    <div class="move" data-search="shield block protect damage absorb basic full"><span class="move-name">Shield ×2</span><span class="move-desc">Creates a damage-absorbing barrier. Basic shield absorbs limited damage. Full Shield completely blocks all incoming hits until the limit is reached.</span></div>
-    <div class="move" data-search="reflect bounce damage back enemy retaliate mirror"><span class="move-name">Reflect Shield ×2</span><span class="move-desc">Sends damage back to the attacker. Normal version reflects a portion. Full Reflect bounces everything until the shield breaks.</span></div>
-    <div class="move" data-search="absorb shield damage limited fully block all"><span class="move-name">Absorb Shield</span><span class="move-desc">Fully absorbs all incoming hits until the damage limit is reached.</span></div>
-  </div>
-
-  <div class="move-section" id="ms-buffs">
-    <div class="move-section-title">Self Buffs</div>
-    <div class="move" data-search="buff damage increase attack power output boost"><span class="move-name">Buff Damage</span><span class="move-desc">Increases your creature's damage output for a few turns. Stack with high Combat Effectiveness for big burst.</span></div>
-    <div class="move" data-search="buff accuracy hit chance increase land more often"><span class="move-name">Buff Accuracy</span><span class="move-desc">Increases hit chance. Useful against high-Agility enemies who dodge frequently.</span></div>
-    <div class="move" data-search="buff crit critical hit chance bonus damage luck"><span class="move-name">Buff Crit Chance</span><span class="move-desc">Increases critical hit chance. Pair with high Combat Effectiveness for big burst potential.</span></div>
-    <div class="move" data-search="speed up agility buff fast go first priority"><span class="move-name">Speed Up / Buff Agility</span><span class="move-desc">Two versions: one boosts speed for next round; the other permanently raises Agility during the match.</span></div>
-    <div class="move" data-search="buff dodge evasion avoid incoming attacks evade"><span class="move-name">Buff Dodge</span><span class="move-desc">Increases dodge chance. Combine with high Agility to make your creature very hard to hit.</span></div>
-    <div class="move" data-search="burrow 100 percent dodge invincible cannot be hit one round"><span class="move-name">Burrow</span><span class="move-desc">Grants 100% dodge for one full round — cannot be hit. Best used to survive a telegraphed charge-up.</span></div>
-    <div class="move" data-search="reset cooldown refresh cd reuse powerful moves again"><span class="move-name">Reset Cooldowns</span><span class="move-desc">Resets all your ability cooldowns instantly so you can reuse powerful moves right away.</span></div>
-    <div class="move" data-search="dispel cleanse remove debuff cure self clean"><span class="move-name">Self Dispel</span><span class="move-desc">Removes all debuffs from yourself. Counters DoTs, bombs, nerfs — but watch for Don't Touch traps.</span></div>
-  </div>
-
-  <div class="move-section" id="ms-debuffs">
-    <div class="move-section-title">Enemy Debuffs</div>
-    <div class="move" data-search="debuff damage reduce enemy attack lower weaken"><span class="move-name">Debuff Damage</span><span class="move-desc">Reduces the enemy's damage output. Very useful against high-attack S-tier opponents.</span></div>
-    <div class="move" data-search="debuff defense reduce armor hit harder penetrate"><span class="move-name">Debuff Defense</span><span class="move-desc">Reduces enemy defense, making all your hits deal more damage. Stacks well with offensive teams.</span></div>
-    <div class="move" data-search="debuff accuracy reduce hit chance blind miss evade"><span class="move-name">Debuff Accuracy</span><span class="move-desc">Reduces enemy's chance to land attacks. Combines well with Agility buffs.</span></div>
-    <div class="move" data-search="combo debuff damage accuracy both reduce cripple"><span class="move-name">Combo Debuff</span><span class="move-desc">Reduces both accuracy AND damage in one move. Cripples offensive creatures efficiently.</span></div>
-    <div class="move" data-search="purge remove buff enemy hostile dispel strip steal"><span class="move-name">Purge</span><span class="move-desc">Strips all buffs from the enemy. Counter to opponents stacking damage, crit, or speed boosts.</span></div>
-    <div class="move" data-search="change affinity force switch element type flip rare"><span class="move-name">Change Affinity ⚡</span><span class="move-desc">Forces the enemy to change their affinity type. Can completely flip a bad matchup into your favor. Very rare.</span></div>
-    <div class="move" data-search="stun skip turn freeze immobilize stop enemy lock"><span class="move-name">Stun</span><span class="move-desc">Makes the enemy skip their next turn entirely. Cancels active charge-ups.</span></div>
-  </div>
-
-  <div class="move-section" id="ms-risky">
-    <div class="move-section-title">Risky / Advanced</div>
-    <div class="move" data-search="self dot recoil big hit hurt yourself damage tradeoff"><span class="move-name">Self-Dot Strike</span><span class="move-desc">Big hit but applies a DoT to yourself. Use when you can KO the enemy next turn or you have healing support.</span></div>
-    <div class="move" data-search="attack both mutual hit yourself and enemy damage both sides"><span class="move-name">Attack Both</span><span class="move-desc">Damages both the enemy AND your own creature. Good for finishing off a low-health enemy when time is running out.</span></div>
-    <div class="move" data-search="enrage big hit buff enemy crit damage hot empower trade"><span class="move-name">Enrage ×3</span><span class="move-desc">Massive hit that also buffs the enemy — one version gives +Crit, one +Damage, one +HoT. Trade burst for empowering your opponent.</span></div>
-    <div class="move" data-search="sacrifice ko yourself buff protect team selfless martyr"><span class="move-name">Sacrifice ×2</span><span class="move-desc">KOs your own creature to either buff your team's damage or shield the rest of your team. Turn a dying creature into an advantage.</span></div>
-    <div class="move" data-search="revive bring back teammate knocked out dead bench resurrect"><span class="move-name">Revive</span><span class="move-desc">Brings a knocked-out teammate back into the fight. Extremely rare. Can completely change a losing situation.</span></div>
-  </div>
-</div>
-
-<!-- BREEDING -->
-<div id="tab-breeding" class="tab">
-  <h2>Breeding & Egg Modifiers</h2>
-  <p class="subtitle">Feed items via the Neural Calibrator at the Egg Sequencer to shape personality traits</p>
-  <div class="warn">⚠ Always <strong>summon the creature first</strong> before using a Retroviral Pellet — otherwise it gets wasted on the wrong animal.</div>
-
-  <div class="trait-block" style="margin-top:24px">
-    <div class="trait-title">⚔ Aggression</div>
-    <div class="trait-sub">High = more offensively driven in battle. Low = more passive.</div>
-    <div class="trait-cols">
-      <div class="col-plus">
-        <div class="col-title">+ Increases</div>
-        <div class="item">Mordite <span>Harvested Substance</span></div>
-        <div class="item">Salt <span>Aquatic Mineral</span></div>
-        <div class="item">Pugneum <span>Anomalous Material</span></div>
-        <div class="item">Sac Venom <span>Trade Commodity</span></div>
-        <div class="item">Larval Core <span>Monstrosity</span></div>
-        <div class="item">Hadal Core <span>Horrific Sample</span></div>
+  <div class="page">
+    <header class="hero">
+      <p class="eyebrow">No Man's Sky Companion Field Note</p>
+      <h1>NMS Xeno Arena Wiki</h1>
+      <p class="hero-copy">
+        A cleaner one-page redo of the cheat sheet: battle rules, affinities, stats, breeding notes,
+        and a searchable move archive rebuilt from the shared spreadsheet snapshot dated April 28, 2026.
+      </p>
+      <div class="hero-meta">
+        <a class="hero-link" href="https://docs.google.com/spreadsheets/d/13deM_rR6Lgfe3MleaBWNmruK0QRcO0yQ--r-KwcN7EA/edit?usp=sharing" target="_blank" rel="noreferrer">
+          Move sheet
+        </a>
+        <a class="hero-link" href="https://github.com/tristan-sys/Nms_Xeno_Battle_Cheatsheet" target="_blank" rel="noreferrer">
+          GitHub repo
+        </a>
       </div>
-      <div class="col-minus">
-        <div class="col-title">− Decreases</div>
-        <div class="item">Nipnip Buds <span>Medicinal Substance</span></div>
-        <div class="item">Geknip <span>Trade Commodity</span></div>
-        <div class="item">Creature Pellets <span>Compressed Nutrients</span></div>
+      <div class="metric-grid">
+        <article class="metric">
+          <span class="metric-value" id="metric-moves">0</span>
+          <span class="metric-label">Tracked moves</span>
+        </article>
+        <article class="metric">
+          <span class="metric-value" id="metric-slots">0</span>
+          <span class="metric-label">Slots mapped</span>
+        </article>
+        <article class="metric">
+          <span class="metric-value" id="metric-featured">0</span>
+          <span class="metric-label">Worth 4+ picks</span>
+        </article>
+        <article class="metric">
+          <span class="metric-value" id="metric-files">0</span>
+          <span class="metric-label">Files-only entries</span>
+        </article>
       </div>
+    </header>
+
+    <div class="layout">
+      <aside class="wiki-nav">
+        <div class="wiki-nav-inner">
+          <p class="wiki-nav-title">On this page</p>
+          <nav class="wiki-nav-links">
+            <a href="#overview">Overview</a>
+            <a href="#battle">Battle Basics</a>
+            <a href="#affinities">Affinities</a>
+            <a href="#stats">Stats &amp; Tiers</a>
+            <a href="#moves">Move Archive</a>
+            <a href="#slots">Slot Map</a>
+            <a href="#featured">High Value</a>
+            <a href="#creatures">Creature Notes</a>
+            <a href="#breeding">Breeding</a>
+            <a href="#team-builder">Team Builder</a>
+          </nav>
+          <p class="wiki-nav-note">
+            The move table uses the spreadsheet's subjective worth scores. They are useful guidance, not official in-game rankings.
+          </p>
+        </div>
+      </aside>
+
+      <main class="content">
+        <section id="overview">
+          <div class="section-head">
+            <p class="eyebrow">Overview</p>
+            <h2>What changed in this redo</h2>
+            <p class="section-copy">
+              The old tabbed page is now a wiki flow. You can skim the fundamentals in order, jump straight to the move database,
+              or use the team tool at the end when you want a quick affinity sanity check.
+            </p>
+          </div>
+          <div class="panel-grid three">
+            <article class="panel">
+              <h3>One page instead of tabs</h3>
+              <p>
+                The guide now reads like a field manual. Core rules, matchup logic, move data, and support tools all live in one scrollable layout.
+              </p>
+            </article>
+            <article class="panel">
+              <h3>Spreadsheet-backed move archive</h3>
+              <p>
+                Every tracked move from the shared sheet is searchable by name, slot, worth, category, and availability.
+              </p>
+            </article>
+            <article class="panel">
+              <h3>Data quirks are surfaced</h3>
+              <p>
+                Entries marked as files only stay visible but clearly flagged. Notes copied straight from the sheet remain attached to the move row they came from.
+              </p>
+            </article>
+          </div>
+          <div class="source-links">
+            <a href="https://docs.google.com/spreadsheets/d/13deM_rR6Lgfe3MleaBWNmruK0QRcO0yQ--r-KwcN7EA/edit?usp=sharing" target="_blank" rel="noreferrer">
+              Open the live move spreadsheet
+            </a>
+            <a href="https://github.com/tristan-sys/Nms_Xeno_Battle_Cheatsheet" target="_blank" rel="noreferrer">
+              Open the current GitHub repo
+            </a>
+          </div>
+        </section>
+
+        <section id="battle">
+          <div class="section-head">
+            <p class="eyebrow">Battle Basics</p>
+            <h2>How holo-battles actually work</h2>
+            <p class="section-copy">
+              The combat loop is simple once the structure clicks: read the lineup, lead the right creature, manage cooldowns,
+              and swap before a bad matchup snowballs.
+            </p>
+          </div>
+          <div class="panel-grid">
+            <article class="panel">
+              <h3>Format</h3>
+              <p>
+                Battles are 3v3 and turn-based. One active creature fights at a time. Knock out all three opposing creatures to win.
+                Pets do not keep battle damage after the match.
+              </p>
+            </article>
+            <article class="panel">
+              <h3>Your options each turn</h3>
+              <p>
+                Use one of five moves, swap to a teammate, or surrender. Stronger moves usually come with cooldown windows, so the whole turn flow is about timing and pressure.
+              </p>
+            </article>
+            <article class="panel">
+              <h3>Turn order</h3>
+              <p>
+                Higher Agility acts first. Agility also helps attacks miss, so fast creatures can control tempo even before raw damage enters the picture.
+              </p>
+            </article>
+            <article class="panel">
+              <h3>Before the fight</h3>
+              <p>
+                You pick your three creatures and order before the match starts. Always inspect the enemy team first and lead into the matchup you actually want.
+              </p>
+            </article>
+          </div>
+          <div class="panel-grid" style="margin-top:14px;">
+            <article class="panel">
+              <h3>Battle flow</h3>
+              <ol class="steps">
+                <li><span class="step-index">1</span><span>Inspect the opposing affinities and likely role coverage.</span></li>
+                <li><span class="step-index">2</span><span>Choose your three creatures and decide which one should start.</span></li>
+                <li><span class="step-index">3</span><span>Use early turns to establish advantage with Agility, shields, pressure, or debuffs.</span></li>
+                <li><span class="step-index">4</span><span>Respect cooldown timing on both sides. Telegraphed charge-up turns are where defensive tools shine.</span></li>
+                <li><span class="step-index">5</span><span>Swap if the active matchup turns bad. Trading tempo is better than losing a creature for nothing.</span></li>
+                <li><span class="step-index">6</span><span>Close the fight by denying enemy recovery and punishing their long cooldown windows.</span></li>
+              </ol>
+            </article>
+            <article class="panel">
+              <h3>Where to fight</h3>
+              <p>
+                <strong>Space Anomaly:</strong> Oceanus handles the tutorial and daily challenge.<br>
+                <strong>Space Stations:</strong> tougher champions and better nanite rewards.<br>
+                <strong>Settlements / Trade Outposts:</strong> easier opponents for leveling and testing lineups.<br>
+                <strong>Player arenas:</strong> best place to host or practice custom matches.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section id="affinities">
+          <div class="section-head">
+            <p class="eyebrow">Affinities</p>
+            <h2>Read the matchup first</h2>
+            <p class="section-copy">
+              Each creature's affinity comes from the planet biome it was found on. Affinity is the fastest way to tell whether a lead is safe, risky, or begging for a swap.
+            </p>
+          </div>
+          <div class="callout tip">
+            Before each fight, inspect the enemy team and deploy the creature that hits into their weakness. If the board turns, swap early rather than forcing a losing exchange.
+          </div>
+          <div class="affinity-table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Affinity</th>
+                  <th>Typical world</th>
+                  <th>Beats</th>
+                  <th>Loses to</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="chip aff-fire">Fire</span></td>
+                  <td>Volcanic / hot</td>
+                  <td><span class="chip aff-frost">Frost</span></td>
+                  <td><span class="chip aff-radioactive">Radioactive</span></td>
+                </tr>
+                <tr>
+                  <td><span class="chip aff-frost">Frost</span></td>
+                  <td>Frozen / icy</td>
+                  <td><span class="chip aff-desert">Desert</span></td>
+                  <td><span class="chip aff-fire">Fire</span></td>
+                </tr>
+                <tr>
+                  <td><span class="chip aff-radioactive">Radioactive</span></td>
+                  <td>Irradiated</td>
+                  <td><span class="chip aff-fire">Fire</span></td>
+                  <td><span class="chip aff-toxic">Toxic</span></td>
+                </tr>
+                <tr>
+                  <td><span class="chip aff-toxic">Toxic</span></td>
+                  <td>Toxic / poison</td>
+                  <td><span class="chip aff-tropical">Tropical</span></td>
+                  <td><span class="chip aff-radioactive">Radioactive</span></td>
+                </tr>
+                <tr>
+                  <td><span class="chip aff-tropical">Tropical</span></td>
+                  <td>Lush / tropical</td>
+                  <td><span class="chip aff-mechanical">Mechanical</span></td>
+                  <td><span class="chip aff-toxic">Toxic</span></td>
+                </tr>
+                <tr>
+                  <td><span class="chip aff-mechanical">Mechanical</span></td>
+                  <td>Robotic creatures</td>
+                  <td><span class="chip aff-toxic">Toxic</span></td>
+                  <td><span class="chip aff-anomalous">Anomalous</span></td>
+                </tr>
+                <tr>
+                  <td><span class="chip aff-anomalous">Anomalous</span></td>
+                  <td>Exotic / strange</td>
+                  <td><span class="chip aff-mechanical">Mechanical</span></td>
+                  <td><span class="chip aff-desert">Desert</span></td>
+                </tr>
+                <tr>
+                  <td><span class="chip aff-desert">Desert</span></td>
+                  <td>Desert / barren</td>
+                  <td><span class="chip aff-radioactive">Radioactive</span></td>
+                  <td><span class="chip aff-frost">Frost</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="loop-grid">
+            <div class="loop-line">
+              <div class="loop-seq">
+                <span class="chip aff-fire">Fire</span>
+                <span class="muted">&rarr;</span>
+                <span class="chip aff-frost">Frost</span>
+                <span class="muted">&rarr;</span>
+                <span class="chip aff-desert">Desert</span>
+                <span class="muted">&rarr;</span>
+                <span class="chip aff-radioactive">Radioactive</span>
+                <span class="muted">&rarr;</span>
+                <span class="chip aff-fire">Fire</span>
+              </div>
+            </div>
+            <div class="loop-line">
+              <div class="loop-seq">
+                <span class="chip aff-toxic">Toxic</span>
+                <span class="muted">&rarr;</span>
+                <span class="chip aff-tropical">Tropical</span>
+                <span class="muted">&rarr;</span>
+                <span class="chip aff-mechanical">Mechanical</span>
+                <span class="muted">&harr;</span>
+                <span class="chip aff-anomalous">Anomalous</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="stats">
+          <div class="section-head">
+            <p class="eyebrow">Stats &amp; Tiers</p>
+            <h2>What the numbers are really doing</h2>
+            <p class="section-copy">
+              Damage is not the whole story. Agility determines who moves first, Health decides whether a creature can stay in the fight,
+              and personality or size nudges how safe or punishing a build feels.
+            </p>
+          </div>
+          <div class="panel-grid">
+            <article class="panel">
+              <h3>Combat Effectiveness</h3>
+              <p>Raw offensive pressure. Most direct damage, DoT burst, and combo damage lean on this first.</p>
+            </article>
+            <article class="panel">
+              <h3>Agility</h3>
+              <p>Controls turn order and improves your chance to avoid incoming hits. It is both tempo and defense.</p>
+            </article>
+            <article class="panel">
+              <h3>Health</h3>
+              <p>How much room a creature has to survive burst, shields coming down, or a bad swap.</p>
+            </article>
+            <article class="panel">
+              <h3>Personality and size</h3>
+              <p>These shape feel more than raw math: aggression, defensive leaning, and how vulnerable the creature feels on board.</p>
+            </article>
+          </div>
+          <div class="tier-list" style="margin-top:16px;">
+            <div class="tier-item">
+              <span class="tier-mark">S</span>
+              <div>
+                <strong>Legendary.</strong>
+                <p>Best-in-class stats. Rare, worth long-term investment, and the easiest place to dump upgrade resources without regret.</p>
+              </div>
+            </div>
+            <div class="tier-item">
+              <span class="tier-mark">A</span>
+              <div>
+                <strong>Excellent.</strong>
+                <p>Competitive with proper affinity coverage and move timing. Strong enough for almost every serious lineup.</p>
+              </div>
+            </div>
+            <div class="tier-item">
+              <span class="tier-mark">B</span>
+              <div>
+                <strong>Solid.</strong>
+                <p>Very serviceable for standard NPC fights and decent testing, but it will feel the ceiling against optimized endgame teams.</p>
+              </div>
+            </div>
+            <div class="tier-item">
+              <span class="tier-mark">C</span>
+              <div>
+                <strong>Starter tier.</strong>
+                <p>Good for growing, learning the systems, and deciding where your pellets and mutation progress should really go.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="moves">
+          <div class="section-head">
+            <p class="eyebrow">Move Archive</p>
+            <h2>Search the sheet like a proper wiki table</h2>
+            <p class="section-copy">
+              The archive below is generated from the shared spreadsheet. Use it like a database: filter by slot, worth, category, or whether the move is still only present in files.
+            </p>
+          </div>
+          <div class="callout tip">
+            <p id="files-only-summary"></p>
+          </div>
+          <div class="filters">
+            <label class="field">
+              <span class="field-label">Search</span>
+              <input id="filter-search" type="search" placeholder="Move ID, description, creature note, or file ID">
+            </label>
+            <label class="field">
+              <span class="field-label">Slot</span>
+              <select id="filter-slot">
+                <option value="">Any</option>
+                <option value="1">Slot 1</option>
+                <option value="2">Slot 2</option>
+                <option value="3">Slot 3</option>
+                <option value="4">Slot 4</option>
+                <option value="5">Slot 5</option>
+              </select>
+            </label>
+            <label class="field">
+              <span class="field-label">Worth</span>
+              <select id="filter-worth">
+                <option value="">Any</option>
+                <option value="5">5 only</option>
+                <option value="4">4+</option>
+                <option value="3">3+</option>
+                <option value="2">2+</option>
+              </select>
+            </label>
+            <label class="field">
+              <span class="field-label">Category</span>
+              <select id="filter-category">
+                <option value="">Any</option>
+              </select>
+            </label>
+            <label class="field">
+              <span class="field-label">Status</span>
+              <select id="filter-status">
+                <option value="">Any</option>
+                <option value="live">Live</option>
+                <option value="files">Files only</option>
+              </select>
+            </label>
+            <button id="clear-filters" class="ghost-btn" type="button">Clear</button>
+          </div>
+          <div class="results-meta">
+            <span id="results-count">Showing 0 moves</span>
+            <span>&middot;</span>
+            <span>Worth scores are copied from the spreadsheet and kept as-is.</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Move</th>
+                  <th>Slot</th>
+                  <th>CD</th>
+                  <th>Worth</th>
+                  <th>Category</th>
+                  <th>Summary</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody id="move-table-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="slots">
+          <div class="section-head">
+            <p class="eyebrow">Slot Map</p>
+            <h2>How the move pool spreads across slots</h2>
+            <p class="section-copy">
+              Slot count matters because the later slots hold most of the utility, control, and swing tools. The cards below surface each slot's density and best-rated entries.
+            </p>
+          </div>
+          <div id="slot-grid" class="slot-grid"></div>
+        </section>
+
+        <section id="featured">
+          <div class="section-head">
+            <p class="eyebrow">High Value</p>
+            <h2>The strongest sheet-rated picks</h2>
+            <p class="section-copy">
+              These are the current worth 4 and 5 moves from the source sheet, grouped back into a cleaner reference view.
+            </p>
+          </div>
+          <div id="featured-grid" class="featured-grid"></div>
+        </section>
+
+        <section id="creatures">
+          <div class="section-head">
+            <p class="eyebrow">Creature Notes</p>
+            <h2>Named milestone creature references from the sheet</h2>
+            <p class="section-copy">
+              Some rows in the sheet point to specific creatures or archetypes. Those notes are broken out here so they do not get buried inside the big move table.
+            </p>
+          </div>
+          <div id="creature-grid" class="creature-grid"></div>
+        </section>
+
+        <section id="breeding">
+          <div class="section-head">
+            <p class="eyebrow">Breeding</p>
+            <h2>Egg sequencing notes worth keeping handy</h2>
+            <p class="section-copy">
+              These are the current quick-reference materials for personality shaping through the Egg Sequencer. Use them like a lookup list, not a full theorycrafting model.
+            </p>
+          </div>
+          <div class="callout warn">
+            Always summon the creature first before using a Retroviral Pellet. Otherwise the pellet can land on the wrong target and disappear for nothing.
+          </div>
+          <div class="breeding-grid">
+            <article class="trait-card">
+              <h3>Aggression</h3>
+              <p>Higher aggression usually means more offense-first behavior in battle logic.</p>
+              <div class="trait-columns">
+                <div class="trait-box">
+                  <h4>Increase</h4>
+                  <ul>
+                    <li>Mordite</li>
+                    <li>Salt</li>
+                    <li>Pugneum</li>
+                    <li>Sac Venom</li>
+                    <li>Larval Core</li>
+                    <li>Hadal Core</li>
+                  </ul>
+                </div>
+                <div class="trait-box">
+                  <h4>Decrease</h4>
+                  <ul>
+                    <li>Nipnip Buds</li>
+                    <li>Geknip</li>
+                    <li>Creature Pellets</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+            <article class="trait-card">
+              <h3>Independence</h3>
+              <p>Independence leans toward self-directed choices and less conservative behavior.</p>
+              <div class="trait-columns">
+                <div class="trait-box">
+                  <h4>Increase</h4>
+                  <ul>
+                    <li>Di-hydrogen</li>
+                    <li>Starship Launch Fuel</li>
+                    <li>Di-hydrogen Jelly</li>
+                  </ul>
+                </div>
+                <div class="trait-box">
+                  <h4>Decrease</h4>
+                  <ul>
+                    <li>Sodium</li>
+                    <li>Sodium Nitrate</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+            <article class="trait-card">
+              <h3>Helpfulness</h3>
+              <p>Helpfulness appears to influence support-leaning tendencies and steadier team behavior.</p>
+              <div class="trait-columns">
+                <div class="trait-box">
+                  <h4>Increase</h4>
+                  <ul>
+                    <li>Ferrite Dust</li>
+                    <li>Pure Ferrite</li>
+                    <li>Magnetised Ferrite</li>
+                    <li>Silicate Powder</li>
+                    <li>Oxygen</li>
+                    <li>Carbon</li>
+                    <li>Condensed Carbon</li>
+                  </ul>
+                </div>
+                <div class="trait-box">
+                  <h4>Decrease</h4>
+                  <ul>
+                    <li>Chromatic Metal</li>
+                    <li>Lubricant</li>
+                    <li>Faecium</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section id="team-builder">
+          <div class="section-head">
+            <p class="eyebrow">Team Builder</p>
+            <h2>Quick affinity sanity check for a three-creature lineup</h2>
+            <p class="section-copy">
+              This is still a lightweight helper, but it now sits inside the wiki instead of living as a separate tab. Pick three affinities and the page will call out overlap, threats, and the best fourth hunt.
+            </p>
+          </div>
+          <div class="team-tool">
+            <div class="team-controls">
+              <label class="field">
+                <span class="field-label">Creature 1</span>
+                <select id="team-one">
+                  <option value="">Select affinity</option>
+                </select>
+              </label>
+              <label class="field">
+                <span class="field-label">Creature 2</span>
+                <select id="team-two">
+                  <option value="">Select affinity</option>
+                </select>
+              </label>
+              <label class="field">
+                <span class="field-label">Creature 3</span>
+                <select id="team-three">
+                  <option value="">Select affinity</option>
+                </select>
+              </label>
+              <button id="analyze-team" class="primary-btn" type="button">Analyze lineup</button>
+            </div>
+            <div id="team-output" class="team-output" hidden>
+              <div class="team-lineup" id="team-lineup"></div>
+              <div class="team-result-grid">
+                <article class="team-result-card">
+                  <p class="field-label">Balance score</p>
+                  <div class="team-score" id="team-score">0</div>
+                  <p class="small-note">Out of 10, based on duplicate weakness and coverage spread.</p>
+                </article>
+                <article class="team-result-card">
+                  <p class="field-label">Suggested fourth hunt</p>
+                  <div id="team-hunt"></div>
+                </article>
+                <article class="team-result-card">
+                  <p class="field-label">Your counters</p>
+                  <div id="team-counters" class="team-badges"></div>
+                </article>
+                <article class="team-result-card">
+                  <p class="field-label">Your threats</p>
+                  <div id="team-threats" class="team-badges"></div>
+                </article>
+              </div>
+              <div class="callout" style="margin-top:14px;">
+                <p id="team-strategy"></p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
   </div>
-
-  <div class="trait-block">
-    <div class="trait-title">🚀 Independence</div>
-    <div class="trait-sub">High = more self-directed decisions in battle.</div>
-    <div class="trait-cols">
-      <div class="col-plus">
-        <div class="col-title">+ Increases</div>
-        <div class="item">Di-hydrogen <span>High Energy Substance</span></div>
-        <div class="item">Starship Launch Fuel <span>Stabilised Fuel</span></div>
-        <div class="item">Di-hydrogen Jelly <span>Life Support Power</span></div>
-      </div>
-      <div class="col-minus">
-        <div class="col-title">− Decreases</div>
-        <div class="item">Sodium <span>Catalytic Element</span></div>
-        <div class="item">Sodium Nitrate <span>Refined Catalyst</span></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="trait-block">
-    <div class="trait-title">🤝 Helpfulness</div>
-    <div class="trait-sub">May influence team-support tendencies in battle.</div>
-    <div class="trait-cols">
-      <div class="col-plus">
-        <div class="col-title">+ Increases</div>
-        <div class="item">Ferrite Dust <span>Metallic Mineral Extract</span></div>
-        <div class="item">Pure Ferrite <span>Processed Metallic</span></div>
-        <div class="item">Magnetised Ferrite <span>Charged Metallic</span></div>
-        <div class="item">Silicate Powder <span>Abundant Mineral</span></div>
-        <div class="item">Oxygen <span>Liquid Fuel</span></div>
-        <div class="item">Carbon <span>Organic Element</span></div>
-        <div class="item">Condensed Carbon <span>Refined Organic</span></div>
-      </div>
-      <div class="col-minus">
-        <div class="col-title">− Decreases</div>
-        <div class="item">Chromatic Metal <span>Stellar Metal</span></div>
-        <div class="item">Lubricant <span>Agricultural Product</span></div>
-        <div class="item">Faecium <span>Agricultural Substance</span></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- TEAM BUILDER -->
-<div id="tab-team" class="tab">
-  <h2>Team Builder</h2>
-  <p class="subtitle">Pick your 3 creatures' affinities to get a full strategic breakdown</p>
-
-  <div class="slot-row"><span class="slot-num">1</span>
-    <select id="s1"><option value="">— Select affinity —</option><option value="fire">🔥 Fire</option><option value="frost">❄ Frost</option><option value="radioactive">☢ Radioactive</option><option value="toxic">☠ Toxic</option><option value="tropical">🌿 Tropical</option><option value="mechanical">⚙ Mechanical</option><option value="anomalous">🌀 Anomalous</option><option value="desert">🏜 Desert</option></select>
-  </div>
-  <div class="slot-row"><span class="slot-num">2</span>
-    <select id="s2"><option value="">— Select affinity —</option><option value="fire">🔥 Fire</option><option value="frost">❄ Frost</option><option value="radioactive">☢ Radioactive</option><option value="toxic">☠ Toxic</option><option value="tropical">🌿 Tropical</option><option value="mechanical">⚙ Mechanical</option><option value="anomalous">🌀 Anomalous</option><option value="desert">🏜 Desert</option></select>
-  </div>
-  <div class="slot-row"><span class="slot-num">3</span>
-    <select id="s3"><option value="">— Select affinity —</option><option value="fire">🔥 Fire</option><option value="frost">❄ Frost</option><option value="radioactive">☢ Radioactive</option><option value="toxic">☠ Toxic</option><option value="tropical">🌿 Tropical</option><option value="mechanical">⚙ Mechanical</option><option value="anomalous">🌀 Anomalous</option><option value="desert">🏜 Desert</option></select>
-  </div>
-
-  <button class="analyze-btn" onclick="analyze()">Analyze Team →</button>
-
-  <div class="result" id="result">
-    <h3>Balance Score</h3>
-    <div class="score-big" id="score"></div>
-    <div class="score-note">out of 10</div>
-
-    <h3>Your Team Counters</h3>
-    <div class="badges" id="counters"></div>
-
-    <h3>Dangerous Against Your Team</h3>
-    <div class="badges" id="threats"></div>
-
-    <div id="dup-warn" class="warn" style="display:none"></div>
-
-    <h3>Strategy</h3>
-    <div class="reco-box" id="strategy"></div>
-
-    <h3 style="margin-top:16px">Best 4th Creature to Hunt</h3>
-    <div class="reco-box" id="hunt"></div>
-  </div>
-</div>
-
-</main>
 
 <script>
-  function tab(id, btn) {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-    document.getElementById('tab-' + id).classList.add('active');
-    btn.classList.add('active');
-  }
+  const RAW_MOVES = [{"moveId":"ATTACK_NORM","slot":1,"cooldownMin":0,"cooldownMax":0,"description":"Physical version of BASIC","rating":0,"notes":"physical type is neutral into everything","creature":"Geno-Prawn","abbreviation":"GP","fileId":"DOT_BOMBER"},{"moveId":"BASIC","slot":1,"cooldownMin":0,"cooldownMax":0,"description":"Deals LOW dmg, deals more dmg if same type?","rating":0,"notes":"CQ & AC have stronger version w/ CD 1","creature":"Wandering Shrimp Tank","abbreviation":"WST","fileId":"OFF_HEALER"},{"moveId":"AFF_SPEED_ME","slot":2,"cooldownMin":1,"cooldownMax":2,"description":"Deals HIGH dmg, increases with self agility","rating":1,"notes":"slot 1 on BH w/ 3x value & CD 1","creature":"Corrupted Quad","abbreviation":"CQ","fileId":"FAST_RAMPER"},{"moveId":"AFF_SPEED_THEM","slot":2,"cooldownMin":1,"cooldownMax":2,"description":"Deals HIGH dmg, increases with enemy agility","rating":2,"notes":null,"creature":"Boundary Horror","abbreviation":"BH","fileId":"QUICK_STRIKER"},{"moveId":"AFF_WILD","slot":2,"cooldownMin":1,"cooldownMax":2,"description":"Deals AVERAGE physical dmg, 50% miss chance","rating":5,"notes":null,"creature":"Aeron Crab","abbreviation":"AC","fileId":"TANKISH"},{"moveId":"ATTACK_DOT_AFF","slot":2,"cooldownMin":1,"cooldownMax":2,"description":"Deals LOW dmg, also deals LOW DoT for X turns","rating":2,"notes":"slot 1 on GP w/ CD 1","creature":null,"abbreviation":null,"fileId":null},{"moveId":"ATTACK_WILD","slot":2,"cooldownMin":1,"cooldownMax":2,"description":"Physical version of AFF_WILD","rating":5,"notes":"physical type is neutral into everything","creature":null,"abbreviation":null,"fileId":null},{"moveId":"BARRAGE_AFF","slot":2,"cooldownMin":1,"cooldownMax":2,"description":"Deals increasing dmg 3 times","rating":2,"notes":"slot 4 on BH w/ approx 0.85x value & CD 3","creature":null,"abbreviation":null,"fileId":null},{"moveId":"MULTI_AFF","slot":2,"cooldownMin":3,"cooldownMax":5,"description":"3 multi turn, deals increasing dmg","rating":4,"notes":"slot 2 on AC w/ 1.25x value & CD 1","creature":null,"abbreviation":null,"fileId":null},{"moveId":"RAMP_AFF","slot":2,"cooldownMin":0,"cooldownMax":1,"description":"Deals dmg, increases with each use and must use again within 3 turns to keep increase","rating":2,"notes":"slot 5 on CQ w/ approx 1.4x value & CD 4; must use within 2 turns on CQ","creature":"slot 5 on CQ w/ approx 1.4x value & CD 4; must use within 2 turns on CQ","abbreviation":null,"fileId":null},{"moveId":"ATTACK_DOT_NORM","slot":2,"cooldownMin":1,"cooldownMax":2,"description":"Physical version of ATTACK_DOT_AFF","rating":3,"notes":null,"creature":null,"abbreviation":null,"fileId":null},{"moveId":"ATTACK_BOTH","slot":3,"cooldownMin":3,"cooldownMax":5,"description":"Deals HEAVY dmg, deals HIGH dmg to self","rating":1,"notes":"slot 1 on WST w/ CD 1, likely cannot miss","creature":null,"abbreviation":null,"fileId":null},{"moveId":"ATTACK_SELFDOT","slot":3,"cooldownMin":3,"cooldownMax":5,"description":"Deals HIGH dmg, deals LOW DoT to self for X turns","rating":2,"notes":"slot 2 on WST w/ CD 2, likely cannot miss","creature":null,"abbreviation":null,"fileId":null},{"moveId":"CHARGEUP_AFF*","slot":3,"cooldownMin":3,"cooldownMax":5,"description":"Decrease self defense for 1 turn, then deals HIGH dmg","rating":4,"notes":null,"creature":null,"abbreviation":null,"fileId":null},{"moveId":"CHARGEUP_BUFF*","slot":3,"cooldownMin":2,"cooldownMax":4,"description":"1st turn increase combat slightly, 2nd turn increase combat greatly, final turn deals AVERAGE dmg","rating":5,"notes":"2nd turn combat increase is completely wasted if going first","creature":null,"abbreviation":null,"fileId":null},{"moveId":"DELAY_AFF","slot":3,"cooldownMin":3,"cooldownMax":4,"description":"Applies DoT that deals HIGH damage after X turns delay","rating":2,"notes":null,"creature":null,"abbreviation":null,"fileId":null},{"moveId":"DOT_AFF","slot":3,"cooldownMin":1,"cooldownMax":3,"description":"Deals LOW DoT for X turns","rating":4,"notes":null,"creature":null,"abbreviation":null,"fileId":null},{"moveId":"DOT_BOMB","slot":3,"cooldownMin":3,"cooldownMax":4,"description":"Applies a DoT that deals HIGH dmg after X turns","rating":4,"notes":null,"creature":null,"abbreviation":null,"fileId":null},{"moveId":"ENRAGE_CRIT","slot":3,"cooldownMin":2,"cooldownMax":2,"description":"Deals AVERAGE dmg, increases enemy crit chance for X turns","rating":3,"notes":"likely cannot miss","creature":null,"abbreviation":null,"fileId":null},{"moveId":"ENRAGE_DAMAGE","slot":3,"cooldownMin":2,"cooldownMax":2,"description":"Deals HIGH dmg, increases enemy combat for X turns","rating":4,"notes":"likely cannot miss","creature":null,"abbreviation":null,"fileId":null},{"moveId":"ENRAGE_HOT","slot":3,"cooldownMin":2,"cooldownMax":2,"description":"Deals HIGH dmg, heals enemy for X turns","rating":3,"notes":"likely cannot miss","creature":null,"abbreviation":null,"fileId":null},{"moveId":"HOSTILE_DISPEL","slot":3,"cooldownMin":2,"cooldownMax":3,"description":"Remove positive effects on enemy","rating":1,"notes":"on WST w/ CD 3, likely cannot miss","creature":null,"abbreviation":null,"fileId":null},{"moveId":"HOSTILE_DISPEL_N","slot":3,"cooldownMin":null,"cooldownMax":null,"description":"Removes negative effects on enemy","rating":0,"notes":"NOT CURRENTLY AVAILABLE ONLY IN FILES, slot unconfirmed","creature":null,"abbreviation":null,"fileId":null},{"moveId":"DELAY_HEAL","slot":4,"cooldownMin":1,"cooldownMax":3,"description":"3 turn delay then heal","rating":4,"notes":null,"creature":null,"abbreviation":null,"fileId":null},{"moveId":"FULL_ABSORB","slot":4,"cooldownMin":2,"cooldownMax":5,"description":"Absorbs set amount of dmg to heal for X turns","rating":2,"notes":"slot 5 on WST w/ 3x higher value & CD 5","creature":null,"abbreviation":null,"fileId":null},{"moveId":"FULL_REFLECT","slot":4,"cooldownMin":2,"cooldownMax":5,"description":"Reflect set amount of dmg","rating":1,"notes":"lasts until destroyed","creature":null,"abbreviation":null,"fileId":null},{"moveId":"FULL_SHIELD","slot":4,"cooldownMin":2,"cooldownMax":5,"description":"Blocks set amount of dmg","rating":2,"notes":"lasts until destroyed","creature":null,"abbreviation":null,"fileId":null},{"moveId":"SELF_ABSORB","slot":4,"cooldownMin":2,"cooldownMax":5,"description":"Absorbs percent dmg to heal for X turns","rating":2,"notes":null,"creature":null,"abbreviation":null,"fileId":null},{"moveId":"SELF_DISPEL","slot":4,"cooldownMin":1,"cooldownMax":2,"description":"Remove negative effects","rating":2,"notes":"slot 3 on AC w/ CD 2","creature":null,"abbreviation":null,"fileId":null},{"moveId":"SELF_HEAL","slot":4,"cooldownMin":1,"cooldownMax":3,"description":"Heals a LOW amount of health","rating":4,"notes":"on GP w/ CD 3","creature":null,"abbreviation":null,"fileId":null},{"moveId":"SELF_HOT","slot":4,"cooldownMin":1,"cooldownMax":4,"description":"LOW heal for X turns","rating":5,"notes":null,"creature":null,"abbreviation":null,"fileId":null},{"moveId":"SELF_REFLECT","slot":4,"cooldownMin":2,"cooldownMax":5,"description":"Reflect percent dmg for X turns","rating":2,"notes":null,"creature":null,"abbreviation":null,"fileId":null},{"moveId":"SELF_SHIELD","slot":4,"cooldownMin":2,"cooldownMax":5,"description":"Block percent dmg for X turns","rating":3,"notes":"slot 3 on BH w/ approx. 3x value & CD 3 || slot 5 on AC w/ approx. 3x value & CD 5","creature":null,"abbreviation":null,"fileId":null},{"moveId":"BUFF_ACCURACY","slot":5,"cooldownMin":2,"cooldownMax":5,"description":"Increase accuracy for X turns","rating":3,"notes":null,"creature":null,"abbreviation":null,"fileId":null},{"moveId":"BUFF_CRIT","slot":5,"cooldownMin":2,"cooldownMax":5,"description":"Increase crit chance for X turns","rating":5,"notes":null,"creature":null,"abbreviation":null,"fileId":null},{"moveId":"BUFF_DAMAGE","slot":5,"cooldownMin":2,"cooldownMax":5,"description":"Increase combat for X turns","rating":3,"notes":null,"creature":null,"abbreviation":null,"fileId":null},{"moveId":"BUFF_DODGE","slot":5,"cooldownMin":2,"cooldownMax":5,"description":"Increase dodge for X turns","rating":4,"notes":"slot 3 on CQ w/ 10x value & CD 3","creature":null,"abbreviation":null,"fileId":null},{"moveId":"BUFF_SPEED","slot":5,"cooldownMin":2,"cooldownMax":5,"description":"Increase agility for X turns","rating":1,"notes":"slot 2 on BH w/ approx. 7x value & CD 2","creature":null,"abbreviation":null,"fileId":null},{"moveId":"BURROW","slot":5,"cooldownMin":2,"cooldownMax":3,"description":"Increase dodge for 1 turn","rating":5,"notes":null,"creature":null,"abbreviation":null,"fileId":null},{"moveId":"CHANGE_AFFINITY","slot":5,"cooldownMin":5,"cooldownMax":5,"description":"Enemy becomes type weak to current active creature's type for 3 turns","rating":2,"notes":"slot 4 on AC, cannot miss","creature":null,"abbreviation":null,"fileId":null},{"moveId":"DEBUFF_ACCURACY","slot":5,"cooldownMin":2,"cooldownMax":5,"description":"Decrease enemy accuracy for X turns","rating":1,"notes":"slot 2 on GP w/ 4x value & CD 2, likely cannot miss","creature":null,"abbreviation":null,"fileId":null},{"moveId":"DEBUFF_DAM","slot":5,"cooldownMin":2,"cooldownMax":5,"description":"Decrease enemy combat for X turns","rating":2,"notes":"slot 3 on GP w/ 4x value & CD 2, likely cannot miss","creature":null,"abbreviation":null,"fileId":null},{"moveId":"DEBUFF_DAM_ACC","slot":5,"cooldownMin":2,"cooldownMax":5,"description":"Decrease enemy combat and accuracy slightly for X turns","rating":2,"notes":"likely cannot miss","creature":null,"abbreviation":null,"fileId":null},{"moveId":"DEBUFF_DEF","slot":5,"cooldownMin":2,"cooldownMax":5,"description":"Decrease enemy defense for X turns","rating":1,"notes":"likely cannot miss","creature":null,"abbreviation":null,"fileId":null},{"moveId":"DONT_TOUCH","slot":5,"cooldownMin":3,"cooldownMax":4,"description":"Decrease enemy combat for X turns, if dispelled deals HEAVY dmg","rating":2,"notes":"on GP w/ CD 5","creature":null,"abbreviation":null,"fileId":null},{"moveId":"REVIVE","slot":5,"cooldownMin":6,"cooldownMax":6,"description":"Revives a creature on the bench","rating":0,"notes":"NOT CURRENTLY AVAILABLE ONLY IN FILES","creature":null,"abbreviation":null,"fileId":null},{"moveId":"SACRIFICE_DEF","slot":5,"cooldownMin":4,"cooldownMax":4,"description":"Deals MASSIVE dmg to self, increase defense for team for X turns","rating":1,"notes":"slot 4 on WST w/ 2x value & CD 3","creature":null,"abbreviation":null,"fileId":null},{"moveId":"SACRIFICE_DAM","slot":5,"cooldownMin":4,"cooldownMax":4,"description":"Deals MASSIVE dmg to self, increase combat for team for X turns","rating":1,"notes":null,"creature":null,"abbreviation":null,"fileId":null},{"moveId":"SELF_RESET_CD","slot":5,"cooldownMin":3,"cooldownMax":3,"description":"Resets all cooldowns","rating":2,"notes":"slot 2 on CQ w/ CD 2, cooldown doesn't actually matter since it resets itself","creature":null,"abbreviation":null,"fileId":null},{"moveId":"SPEED_UP","slot":5,"cooldownMin":1,"cooldownMax":1,"description":"Increase agility greatly for 1 turn","rating":1,"notes":"4x higher value on BH w/ CD 5","creature":null,"abbreviation":null,"fileId":null},{"moveId":"STUN","slot":5,"cooldownMin":2,"cooldownMax":2,"description":"Stun enemy for 1 turn","rating":3,"notes":"slot 4 on CQ w/ CD 3, likely cannot miss","creature":null,"abbreviation":null,"fileId":null}];
 
-  const AFF = {
-    fire:        { label: '🔥 Fire',        cls: 'fire',        beats: 'frost',       losesTo: 'radioactive', biome: 'volcanic/hot' },
-    frost:       { label: '❄ Frost',        cls: 'frost',       beats: 'desert',      losesTo: 'fire',        biome: 'frozen/icy' },
-    radioactive: { label: '☢ Radioactive',  cls: 'radioactive', beats: 'fire',        losesTo: 'toxic',       biome: 'irradiated' },
-    toxic:       { label: '☠ Toxic',        cls: 'toxic',       beats: 'tropical',    losesTo: 'radioactive', biome: 'toxic/poison' },
-    tropical:    { label: '🌿 Tropical',    cls: 'tropical',    beats: 'mechanical',  losesTo: 'toxic',       biome: 'lush/tropical' },
-    mechanical:  { label: '⚙ Mechanical',  cls: 'mechanical',  beats: 'toxic',       losesTo: 'anomalous',   biome: 'robotic creatures' },
-    anomalous:   { label: '🌀 Anomalous',   cls: 'anomalous',   beats: 'mechanical',  losesTo: 'desert',      biome: 'exotic/weird' },
-    desert:      { label: '🏜 Desert',      cls: 'desert',      beats: 'radioactive', losesTo: 'frost',       biome: 'desert/barren' }
+  const AFFINITIES = {
+    fire: { label: "Fire", className: "aff-fire", beats: "frost", losesTo: "radioactive", world: "volcanic / hot" },
+    frost: { label: "Frost", className: "aff-frost", beats: "desert", losesTo: "fire", world: "frozen / icy" },
+    radioactive: { label: "Radioactive", className: "aff-radioactive", beats: "fire", losesTo: "toxic", world: "irradiated" },
+    toxic: { label: "Toxic", className: "aff-toxic", beats: "tropical", losesTo: "radioactive", world: "toxic / poison" },
+    tropical: { label: "Tropical", className: "aff-tropical", beats: "mechanical", losesTo: "toxic", world: "lush / tropical" },
+    mechanical: { label: "Mechanical", className: "aff-mechanical", beats: "toxic", losesTo: "anomalous", world: "robotic creatures" },
+    anomalous: { label: "Anomalous", className: "aff-anomalous", beats: "mechanical", losesTo: "desert", world: "exotic / strange" },
+    desert: { label: "Desert", className: "aff-desert", beats: "radioactive", losesTo: "frost", world: "desert / barren" }
   };
 
-  function badge(k) {
-    return `<span class="badge ${AFF[k].cls}">${AFF[k].label}</span>`;
-  }
+  const WORTH_META = {
+    0: { label: "0 / Niche", className: "worth-0" },
+    1: { label: "1 / Low", className: "worth-1" },
+    2: { label: "2 / Conditional", className: "worth-2" },
+    3: { label: "3 / Solid", className: "worth-3" },
+    4: { label: "4 / Strong", className: "worth-4" },
+    5: { label: "5 / Premium", className: "worth-5" }
+  };
 
-  function analyze() {
-    const v = ['s1','s2','s3'].map(id => document.getElementById(id).value);
-    if (v.some(x => !x)) { alert('Please pick all 3 affinities.'); return; }
+  const escapeHtml = (value) => String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 
-    const counters = [...new Set(v.map(a => AFF[a].beats))];
-    const threats  = [...new Set(v.map(a => AFF[a].losesTo))];
+  const titleCase = (value) => value
+    .split(" ")
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
 
-    document.getElementById('counters').innerHTML = counters.map(badge).join('');
-    document.getElementById('threats').innerHTML  = threats.map(badge).join('');
+  const categoryForMove = (move) => {
+    const haystack = `${move.moveId} ${move.description} ${move.notes ?? ""}`.toLowerCase();
 
-    const dupes = v.filter((x,i) => v.indexOf(x) !== i);
-    const dupEl = document.getElementById('dup-warn');
-    if (dupes.length) {
-      dupEl.style.display = '';
-      dupEl.innerHTML = `⚠ Duplicate affinity: multiple <strong>${[...new Set(dupes)].map(k=>AFF[k].label).join(', ')}</strong> — one counter type threatens several of your creatures.`;
-    } else { dupEl.style.display = 'none'; }
+    if (/heal|shield|reflect|absorb|hot/.test(haystack)) {
+      return "Recovery";
+    }
+    if (/buff|burrow|speed_up|reset_cd|reset cooldown/.test(haystack)) {
+      return "Buff";
+    }
+    if (/debuff|dispel|stun|change_affinity|dont_touch|accuracy slightly|remove positive/.test(haystack)) {
+      return "Control";
+    }
+    if (/dot|delay|bomb|trap/.test(haystack)) {
+      return "DoT / Trap";
+    }
+    if (/revive|sacrifice|enrage|selfdot|attack_both/.test(haystack)) {
+      return "Risk / Utility";
+    }
+    return "Damage";
+  };
+
+  const normalizeMove = (rawMove) => {
+    let note = rawMove.notes || "";
+    let creature = rawMove.creature || "";
+
+    if (creature && note && creature === note) {
+      creature = "";
+    }
+
+    if (creature && /slot\s+\d|cd\s+\d|w\/|must use/i.test(creature)) {
+      note = note ? `${note} | ${creature}` : creature;
+      creature = "";
+    }
+
+    const availability = /not currently available only in files/i.test(note) ? "files" : "live";
+    const cooldownLabel = rawMove.cooldownMin == null && rawMove.cooldownMax == null
+      ? "Unconfirmed"
+      : rawMove.cooldownMin === rawMove.cooldownMax
+        ? String(rawMove.cooldownMin)
+        : `${rawMove.cooldownMin}-${rawMove.cooldownMax}`;
+
+    return {
+      ...rawMove,
+      note,
+      creature,
+      availability,
+      cooldownLabel,
+      category: categoryForMove({ ...rawMove, notes: note }),
+      searchText: [
+        rawMove.moveId,
+        rawMove.description,
+        note,
+        creature,
+        rawMove.abbreviation,
+        rawMove.fileId
+      ].filter(Boolean).join(" ").toLowerCase()
+    };
+  };
+
+  const MOVES = RAW_MOVES
+    .map(normalizeMove)
+    .sort((left, right) =>
+      left.slot - right.slot ||
+      (right.rating ?? -1) - (left.rating ?? -1) ||
+      left.moveId.localeCompare(right.moveId)
+    );
+
+  const FEATURED_MOVES = MOVES.filter((move) => move.rating >= 4 && move.availability === "live");
+  const FILES_ONLY_MOVES = MOVES.filter((move) => move.availability === "files");
+  const CREATURE_MOVES = MOVES.filter((move) => move.creature);
+  const CATEGORIES = [...new Set(MOVES.map((move) => move.category))];
+
+  const worthChip = (rating) => {
+    const meta = WORTH_META[rating] || { label: "Unknown", className: "worth-0" };
+    return `<span class="worth ${meta.className}">${meta.label}</span>`;
+  };
+
+  const statusChip = (availability) => availability === "files"
+    ? '<span class="status-chip status-files">Files only</span>'
+    : '<span class="status-chip status-live">Live</span>';
+
+  const categoryChip = (category) => `<span class="category-chip">${escapeHtml(category)}</span>`;
+
+  const renderMetrics = () => {
+    document.getElementById("metric-moves").textContent = String(MOVES.length);
+    document.getElementById("metric-slots").textContent = String(new Set(MOVES.map((move) => move.slot)).size);
+    document.getElementById("metric-featured").textContent = String(FEATURED_MOVES.length);
+    document.getElementById("metric-files").textContent = String(FILES_ONLY_MOVES.length);
+    document.getElementById("files-only-summary").textContent = FILES_ONLY_MOVES.length
+      ? `Files-only entries currently flagged in the sheet: ${FILES_ONLY_MOVES.map((move) => move.moveId).join(", ")}.`
+      : "No files-only entries are flagged right now.";
+  };
+
+  const renderCategoryOptions = () => {
+    const select = document.getElementById("filter-category");
+    select.innerHTML += CATEGORIES
+      .map((category) => `<option value="${escapeHtml(category)}">${escapeHtml(category)}</option>`)
+      .join("");
+  };
+
+  const filteredMoves = () => {
+    const search = document.getElementById("filter-search").value.trim().toLowerCase();
+    const slot = document.getElementById("filter-slot").value;
+    const worth = document.getElementById("filter-worth").value;
+    const category = document.getElementById("filter-category").value;
+    const status = document.getElementById("filter-status").value;
+
+    return MOVES.filter((move) => {
+      if (search && !move.searchText.includes(search)) return false;
+      if (slot && String(move.slot) !== slot) return false;
+      if (worth && (move.rating ?? -1) < Number(worth)) return false;
+      if (category && move.category !== category) return false;
+      if (status && move.availability !== status) return false;
+      return true;
+    });
+  };
+
+  const renderMoveTable = () => {
+    const rows = filteredMoves();
+    const body = document.getElementById("move-table-body");
+    document.getElementById("results-count").textContent = `Showing ${rows.length} of ${MOVES.length} moves`;
+
+    if (!rows.length) {
+      body.innerHTML = '<tr><td colspan="7" class="empty-state">No moves match the current filters.</td></tr>';
+      return;
+    }
+
+    body.innerHTML = rows.map((move) => {
+      const noteBits = [];
+      if (move.note) noteBits.push(`<div>${escapeHtml(move.note)}</div>`);
+      if (move.creature) {
+        const bits = [
+          escapeHtml(move.creature),
+          move.abbreviation ? escapeHtml(move.abbreviation) : "",
+          move.fileId ? escapeHtml(move.fileId) : ""
+        ].filter(Boolean);
+        noteBits.push(`<div><strong>${bits.join(" · ")}</strong></div>`);
+      }
+
+      const idBits = [];
+      idBits.push(`<div class="move-name">${escapeHtml(move.moveId)}</div>`);
+      if (move.fileId) {
+        idBits.push(`<div class="small-note">Role / file ID: ${escapeHtml(move.fileId)}</div>`);
+      }
+
+      return `
+        <tr>
+          <td>
+            <div class="id-stack">
+              ${idBits.join("")}
+              <div class="chip-row">
+                ${statusChip(move.availability)}
+              </div>
+            </div>
+          </td>
+          <td>${escapeHtml(move.slot)}</td>
+          <td>${escapeHtml(move.cooldownLabel)}</td>
+          <td>${worthChip(move.rating)}</td>
+          <td>${categoryChip(move.category)}</td>
+          <td>${escapeHtml(move.description)}</td>
+          <td>${noteBits.length ? noteBits.join("") : '<span class="small-note">No extra note</span>'}</td>
+        </tr>
+      `;
+    }).join("");
+  };
+
+  const renderSlotCards = () => {
+    const slotGrid = document.getElementById("slot-grid");
+    const grouped = [...new Set(MOVES.map((move) => move.slot))]
+      .sort((left, right) => left - right)
+      .map((slot) => ({
+        slot,
+        moves: MOVES.filter((move) => move.slot === slot)
+      }));
+
+    slotGrid.innerHTML = grouped.map(({ slot, moves }) => {
+      const topMoves = moves
+        .filter((move) => move.rating != null)
+        .sort((left, right) => (right.rating ?? -1) - (left.rating ?? -1) || left.moveId.localeCompare(right.moveId))
+        .slice(0, 3);
+
+      return `
+        <article class="slot-card">
+          <h3>Slot ${slot}</h3>
+          <p>${moves.length} tracked move${moves.length === 1 ? "" : "s"} sit in this slot.</p>
+          <div class="slot-meta">
+            <span class="chip">Highest worth: ${Math.max(...moves.map((move) => move.rating ?? 0))}</span>
+            <span class="chip">Categories: ${new Set(moves.map((move) => move.category)).size}</span>
+          </div>
+          <div class="mini-list">
+            ${topMoves.map((move) => `
+              <div class="mini-list-item">
+                <strong>${escapeHtml(move.moveId)}</strong>
+                <span>${move.rating}/5</span>
+              </div>
+            `).join("")}
+          </div>
+        </article>
+      `;
+    }).join("");
+  };
+
+  const renderFeatured = () => {
+    const grid = document.getElementById("featured-grid");
+
+    grid.innerHTML = FEATURED_MOVES.map((move) => `
+      <article class="featured-card">
+        <div class="featured-meta">
+          <span class="chip">Slot ${escapeHtml(move.slot)}</span>
+          <span class="chip">CD ${escapeHtml(move.cooldownLabel)}</span>
+          ${worthChip(move.rating)}
+        </div>
+        <h3>${escapeHtml(move.moveId)}</h3>
+        <p>${escapeHtml(move.description)}</p>
+        <div class="chip-row" style="margin-top:10px;">
+          ${categoryChip(move.category)}
+          ${statusChip(move.availability)}
+        </div>
+        ${move.note ? `<p class="small-note" style="margin-top:12px;">${escapeHtml(move.note)}</p>` : ""}
+      </article>
+    `).join("");
+  };
+
+  const renderCreatureCards = () => {
+    const grid = document.getElementById("creature-grid");
+
+    if (!CREATURE_MOVES.length) {
+      grid.innerHTML = '<div class="empty-state">No creature-linked notes are currently available in the sheet.</div>';
+      return;
+    }
+
+    grid.innerHTML = CREATURE_MOVES.map((move) => `
+      <article class="creature-card">
+        <div class="creature-meta">
+          <span class="chip">${escapeHtml(move.abbreviation || "Creature note")}</span>
+          ${move.fileId ? `<span class="chip">${escapeHtml(move.fileId)}</span>` : ""}
+        </div>
+        <h3>${escapeHtml(move.creature)}</h3>
+        <p><strong>Referenced move:</strong> ${escapeHtml(move.moveId)}</p>
+        <p>${escapeHtml(move.description)}</p>
+        ${move.note ? `<p class="small-note">${escapeHtml(move.note)}</p>` : ""}
+      </article>
+    `).join("");
+  };
+
+  const affinityBadge = (key) => {
+    const affinity = AFFINITIES[key];
+    return `<span class="chip ${affinity.className}">${escapeHtml(affinity.label)}</span>`;
+  };
+
+  const renderAffinityOptions = () => {
+    const options = Object.entries(AFFINITIES)
+      .map(([key, affinity]) => `<option value="${key}">${escapeHtml(affinity.label)}</option>`)
+      .join("");
+
+    ["team-one", "team-two", "team-three"].forEach((id) => {
+      const select = document.getElementById(id);
+      select.innerHTML += options;
+    });
+  };
+
+  const analyzeTeam = () => {
+    const values = ["team-one", "team-two", "team-three"].map((id) => document.getElementById(id).value);
+    if (values.some((value) => !value)) {
+      alert("Pick all three affinities first.");
+      return;
+    }
+
+    const counters = [...new Set(values.map((value) => AFFINITIES[value].beats))];
+    const threats = [...new Set(values.map((value) => AFFINITIES[value].losesTo))];
+    const duplicates = values.filter((value, index) => values.indexOf(value) !== index);
 
     let score = 5;
-    if (new Set(v).size === 3) score += 2; else if (new Set(v).size === 1) score -= 3;
-    if (new Set(counters).size >= 3) score += 2; else if (new Set(counters).size === 2) score += 1;
-    if (threats.filter((x,i) => threats.indexOf(x) !== i).length) score -= 2;
+    if (new Set(values).size === 3) score += 2;
+    if (new Set(counters).size >= 3) score += 2;
+    if (duplicates.length) score -= 2;
+    if (new Set(values).size === 1) score -= 2;
     score = Math.max(1, Math.min(10, score));
 
-    const scoreEl = document.getElementById('score');
-    scoreEl.textContent = score;
-    scoreEl.style.color = score >= 8 ? '#33ee88' : score >= 5 ? '#ffdd55' : '#ff6644';
-
-    const names = v.map(a => AFF[a].label).join(', ');
-    let strat = '';
-    if (score >= 8) {
-      strat = `<strong>${names}</strong> — well-balanced. Diverse coverage with no single affinity threatening your whole lineup. Lead with your fastest creature to take first-turn control.`;
-    } else if (score >= 5) {
-      strat = `<strong>${names}</strong> — decent, but ${threats.map(k=>AFF[k].label).join(' and ')} can threaten multiple members. Use debuff moves (reduce enemy damage/accuracy) when facing your weak matchup.`;
-    } else {
-      strat = `<strong>${names}</strong> — significant gap. ${threats.map(k=>AFF[k].label).join(' and ')} threaten your whole lineup. Use Burrow (100% dodge) or Sacrifice as emergency options and hunt a counter creature.`;
-    }
-    document.getElementById('strategy').innerHTML = strat;
-
     const threatSet = new Set(threats);
-    let best = null, bestScore = -1;
-    for (const [k, data] of Object.entries(AFF)) {
-      if (v.includes(k)) continue;
-      let s = 0;
-      if (threatSet.has(data.beats)) s += 3;
-      if (!threatSet.has(data.losesTo)) s += 1;
-      if (s > bestScore) { bestScore = s; best = k; }
-    }
-    document.getElementById('hunt').innerHTML = best
-      ? `${badge(best)} — counters ${badge(AFF[best].beats)}, one of your threat types. Hunt on a <strong>${AFF[best].biome}</strong> planet.`
-      : 'Your current team already has good coverage.';
+    let bestRecruit = null;
+    let bestRecruitScore = -Infinity;
 
-    document.getElementById('result').classList.add('show');
-    document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
+    Object.entries(AFFINITIES).forEach(([key, affinity]) => {
+      if (values.includes(key)) return;
 
-  function filterMoves(q) {
-    q = q.toLowerCase();
-    document.querySelectorAll('.move').forEach(m => {
-      const text = (m.dataset.search || '') + m.textContent.toLowerCase();
-      m.classList.toggle('hidden', q.length > 0 && !text.includes(q));
+      let recruitScore = 0;
+      if (threatSet.has(affinity.beats)) recruitScore += 3;
+      if (!threatSet.has(key)) recruitScore += 1;
+      if (recruitScore > bestRecruitScore) {
+        bestRecruit = key;
+        bestRecruitScore = recruitScore;
+      }
     });
-    document.querySelectorAll('.move-section').forEach(s => {
-      s.style.display = q.length > 0 && !s.querySelectorAll('.move:not(.hidden)').length ? 'none' : '';
-    });
-  }
+
+    const strategy = (() => {
+      const lineupNames = values.map((value) => AFFINITIES[value].label).join(", ");
+      if (score >= 8) {
+        return `${lineupNames} gives you broad coverage with minimal overlap. Lead with your fastest creature and save the best counter swap for the second reveal.`;
+      }
+      if (score >= 5) {
+        return `${lineupNames} is workable, but some threats overlap. Respect ${threats.map((value) => AFFINITIES[value].label).join(" and ")} and do not stay in bad affinity fights too long.`;
+      }
+      return `${lineupNames} has real overlap. You will need shields, dodge turns, or a very disciplined swap plan when the wrong affinity shows up first.`;
+    })();
+
+    document.getElementById("team-output").hidden = false;
+    document.getElementById("team-lineup").innerHTML = values.map(affinityBadge).join("");
+    document.getElementById("team-score").textContent = String(score);
+    document.getElementById("team-counters").innerHTML = counters.map(affinityBadge).join("");
+    document.getElementById("team-threats").innerHTML = threats.map(affinityBadge).join("");
+    document.getElementById("team-strategy").textContent = strategy;
+    document.getElementById("team-hunt").innerHTML = bestRecruit
+      ? `${affinityBadge(bestRecruit)}<p class="small-note" style="margin-top:10px;">Best extra hunt based on shared weaknesses. Search ${AFFINITIES[bestRecruit].world} worlds.</p>`
+      : '<p class="small-note">No obvious fourth hunt suggestion.</p>';
+  };
+
+  const clearFilters = () => {
+    document.getElementById("filter-search").value = "";
+    document.getElementById("filter-slot").value = "";
+    document.getElementById("filter-worth").value = "";
+    document.getElementById("filter-category").value = "";
+    document.getElementById("filter-status").value = "";
+    renderMoveTable();
+  };
+
+  const setupScrollNav = () => {
+    const links = [...document.querySelectorAll(".wiki-nav a")];
+    const sections = links
+      .map((link) => document.querySelector(link.getAttribute("href")))
+      .filter(Boolean);
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        links.forEach((link) => {
+          link.classList.toggle("active", link.getAttribute("href") === `#${entry.target.id}`);
+        });
+      });
+    }, { rootMargin: "-30% 0px -55% 0px", threshold: 0 });
+
+    sections.forEach((section) => observer.observe(section));
+  };
+
+  renderMetrics();
+  renderCategoryOptions();
+  renderMoveTable();
+  renderSlotCards();
+  renderFeatured();
+  renderCreatureCards();
+  renderAffinityOptions();
+  setupScrollNav();
+
+  ["filter-search", "filter-slot", "filter-worth", "filter-category", "filter-status"].forEach((id) => {
+    document.getElementById(id).addEventListener("input", renderMoveTable);
+    document.getElementById(id).addEventListener("change", renderMoveTable);
+  });
+
+  document.getElementById("clear-filters").addEventListener("click", clearFilters);
+  document.getElementById("analyze-team").addEventListener("click", analyzeTeam);
 </script>
 </body>
 </html>
