@@ -716,6 +716,26 @@
     background: rgba(255, 255, 255, 0.7);
   }
 
+  .counter-map {
+    display: grid;
+    gap: 10px;
+    margin-top: 14px;
+  }
+
+  .counter-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(24, 32, 28, 0.08);
+  }
+
+  .counter-row:first-child {
+    padding-top: 0;
+    border-top: none;
+  }
+
   .team-score {
     font-size: 40px;
     font-weight: 700;
@@ -839,6 +859,7 @@
             <a href="#featured">High Value</a>
             <a href="#creatures">Creature Notes</a>
             <a href="#breeding">Breeding</a>
+            <a href="#counter-maker">Counter Maker</a>
             <a href="#team-builder">Team Builder</a>
           </nav>
           <p class="wiki-nav-note">
@@ -1303,6 +1324,69 @@
           </div>
         </section>
 
+        <section id="counter-maker">
+          <div class="section-head">
+            <p class="eyebrow">Counter Maker</p>
+            <h2>Build a counter lineup from the opponent's three affinities</h2>
+            <p class="section-copy">
+              Feed in the enemy lineup and the page will generate a recommended three-affinity answer, suggest the best lead into the first listed opponent,
+              and map each enemy type to your best available counter.
+            </p>
+          </div>
+          <div class="team-tool">
+            <div class="team-controls">
+              <label class="field">
+                <span class="field-label">Opponent 1</span>
+                <select id="counter-one">
+                  <option value="">Select affinity</option>
+                </select>
+              </label>
+              <label class="field">
+                <span class="field-label">Opponent 2</span>
+                <select id="counter-two">
+                  <option value="">Select affinity</option>
+                </select>
+              </label>
+              <label class="field">
+                <span class="field-label">Opponent 3</span>
+                <select id="counter-three">
+                  <option value="">Select affinity</option>
+                </select>
+              </label>
+              <button id="analyze-counter" class="primary-btn" type="button">Build counter</button>
+            </div>
+            <div id="counter-output" class="team-output" hidden>
+              <div class="team-result-grid">
+                <article class="team-result-card">
+                  <p class="field-label">Recommended counter team</p>
+                  <div id="counter-lineup" class="team-lineup"></div>
+                  <p class="small-note" id="counter-lineup-note" style="margin-top:10px;"></p>
+                </article>
+                <article class="team-result-card">
+                  <p class="field-label">Best lead</p>
+                  <div id="counter-lead"></div>
+                  <p class="small-note" id="counter-lead-note" style="margin-top:10px;"></p>
+                </article>
+                <article class="team-result-card">
+                  <p class="field-label">Enemy pressure covered</p>
+                  <div id="counter-coverage"></div>
+                </article>
+                <article class="team-result-card">
+                  <p class="field-label">Watch out for</p>
+                  <div id="counter-risk"></div>
+                </article>
+              </div>
+              <div class="callout" style="margin-top:14px;">
+                <p id="counter-strategy"></p>
+              </div>
+              <div class="team-result-card" style="margin-top:14px;">
+                <p class="field-label">Counter map</p>
+                <div id="counter-map" class="counter-map"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section id="team-builder">
           <div class="section-head">
             <p class="eyebrow">Team Builder</p>
@@ -1386,6 +1470,8 @@
     4: { label: "4 / Strong", className: "worth-4" },
     5: { label: "5 / Premium", className: "worth-5" }
   };
+
+  const AFFINITY_KEYS = Object.keys(AFFINITIES);
 
   const escapeHtml = (value) => String(value ?? "")
     .replace(/&/g, "&amp;")
@@ -1649,15 +1735,130 @@
     return `<span class="chip ${affinity.className}">${escapeHtml(affinity.label)}</span>`;
   };
 
+  const matchupValue = (ourAffinity, enemyAffinity) => {
+    if (AFFINITIES[ourAffinity].beats === enemyAffinity) return 2;
+    if (AFFINITIES[ourAffinity].losesTo === enemyAffinity) return -1;
+    return 0;
+  };
+
+  const scoreAffinityIntoField = (ourAffinity, enemyValues) => enemyValues.reduce((total, enemyAffinity) => {
+    const value = matchupValue(ourAffinity, enemyAffinity);
+    if (value === 2) return total + 2;
+    if (value === 0) return total + 0.5;
+    return total - 1.25;
+  }, 0);
+
+  const bestCounterForEnemy = (teamValues, enemyAffinity, fullEnemyValues) => {
+    return [...teamValues]
+      .sort((left, right) => {
+        const scoreDiff = matchupValue(right, enemyAffinity) - matchupValue(left, enemyAffinity);
+        if (scoreDiff !== 0) return scoreDiff;
+        const fieldDiff = scoreAffinityIntoField(right, fullEnemyValues) - scoreAffinityIntoField(left, fullEnemyValues);
+        if (fieldDiff !== 0) return fieldDiff;
+        return left.localeCompare(right);
+      })[0];
+  };
+
+  const evaluateCounterTeam = (teamValues, enemyValues) => {
+    const counterMap = enemyValues.map((enemyAffinity) => {
+      const counterAffinity = bestCounterForEnemy(teamValues, enemyAffinity, enemyValues);
+      return {
+        enemyAffinity,
+        counterAffinity,
+        score: matchupValue(counterAffinity, enemyAffinity)
+      };
+    });
+
+    const directCounters = counterMap.filter((entry) => entry.score === 2).length;
+    const uncovered = counterMap.filter((entry) => entry.score < 2).length;
+    const teamFieldScore = teamValues.reduce((total, affinity) => total + scoreAffinityIntoField(affinity, enemyValues), 0);
+    const exposedSlots = teamValues.reduce((total, affinity) => total + enemyValues.filter((enemyAffinity) => matchupValue(affinity, enemyAffinity) === -1).length, 0);
+    const duplicatePenalty = teamValues.length - new Set(teamValues).size;
+    const totalScore = directCounters * 10 + teamFieldScore * 2 - exposedSlots * 1.5 - uncovered * 2 - duplicatePenalty * 5;
+
+    return {
+      teamValues,
+      counterMap,
+      directCounters,
+      exposedSlots,
+      uncovered,
+      totalScore
+    };
+  };
+
+  const recommendCounterTeam = (enemyValues) => {
+    let bestPlan = null;
+
+    for (let a = 0; a < AFFINITY_KEYS.length; a += 1) {
+      for (let b = a + 1; b < AFFINITY_KEYS.length; b += 1) {
+        for (let c = b + 1; c < AFFINITY_KEYS.length; c += 1) {
+          const plan = evaluateCounterTeam([AFFINITY_KEYS[a], AFFINITY_KEYS[b], AFFINITY_KEYS[c]], enemyValues);
+
+          if (
+            !bestPlan ||
+            plan.totalScore > bestPlan.totalScore ||
+            (plan.totalScore === bestPlan.totalScore && plan.directCounters > bestPlan.directCounters) ||
+            (plan.totalScore === bestPlan.totalScore && plan.directCounters === bestPlan.directCounters && plan.exposedSlots < bestPlan.exposedSlots)
+          ) {
+            bestPlan = plan;
+          }
+        }
+      }
+    }
+
+    return bestPlan;
+  };
+
   const renderAffinityOptions = () => {
-    const options = Object.entries(AFFINITIES)
+    const options = AFFINITY_KEYS
+      .map((key) => [key, AFFINITIES[key]])
       .map(([key, affinity]) => `<option value="${key}">${escapeHtml(affinity.label)}</option>`)
       .join("");
 
-    ["team-one", "team-two", "team-three"].forEach((id) => {
+    ["counter-one", "counter-two", "counter-three", "team-one", "team-two", "team-three"].forEach((id) => {
       const select = document.getElementById(id);
       select.innerHTML += options;
     });
+  };
+
+  const analyzeCounter = () => {
+    const enemyValues = ["counter-one", "counter-two", "counter-three"].map((id) => document.getElementById(id).value);
+    if (enemyValues.some((value) => !value)) {
+      alert("Pick all three opponent affinities first.");
+      return;
+    }
+
+    const plan = recommendCounterTeam(enemyValues);
+    const leadAffinity = bestCounterForEnemy(plan.teamValues, enemyValues[0], enemyValues);
+    const pressures = enemyValues.filter((enemyAffinity) =>
+      plan.teamValues.filter((teamAffinity) => matchupValue(teamAffinity, enemyAffinity) === -1).length >= 2
+    );
+
+    document.getElementById("counter-output").hidden = false;
+    document.getElementById("counter-lineup").innerHTML = plan.teamValues.map(affinityBadge).join("");
+    document.getElementById("counter-lineup-note").textContent =
+      `Direct counters found for ${plan.directCounters} of ${enemyValues.length} enemy affinities.`;
+    document.getElementById("counter-lead").innerHTML = affinityBadge(leadAffinity);
+    document.getElementById("counter-lead-note").textContent =
+      `Lead this into the first listed opponent: ${AFFINITIES[enemyValues[0]].label}.`;
+    document.getElementById("counter-coverage").innerHTML = plan.counterMap.map((entry) =>
+      `<div class="team-badges">${affinityBadge(entry.enemyAffinity)}<span class="muted">&rarr;</span>${affinityBadge(entry.counterAffinity)}</div>`
+    ).join("");
+    document.getElementById("counter-risk").innerHTML = pressures.length
+      ? `<div class="team-badges">${pressures.map(affinityBadge).join("")}</div><p class="small-note" style="margin-top:10px;">These enemy affinities still threaten multiple bench options if you swap carelessly.</p>`
+      : '<p class="small-note">No enemy affinity in this set cleanly pressures most of the suggested counter bench.</p>';
+
+    document.getElementById("counter-strategy").textContent =
+      `${enemyValues.map((value) => AFFINITIES[value].label).join(", ")} is answered best by ${plan.teamValues.map((value) => AFFINITIES[value].label).join(", ")}. Open with ${AFFINITIES[leadAffinity].label}, hold your other two counters for the enemy reveals they specifically answer, and avoid swapping into an affinity that the remaining bench can already cover better.`;
+
+    document.getElementById("counter-map").innerHTML = plan.counterMap.map((entry) => `
+      <div class="counter-row">
+        ${affinityBadge(entry.enemyAffinity)}
+        <span class="muted">&rarr;</span>
+        ${affinityBadge(entry.counterAffinity)}
+        <span class="small-note">${entry.score === 2 ? "Direct type advantage" : entry.score === 0 ? "Neutral answer" : "Emergency only"}</span>
+      </div>
+    `).join("");
   };
 
   const analyzeTeam = () => {
@@ -1758,6 +1959,7 @@
   });
 
   document.getElementById("clear-filters").addEventListener("click", clearFilters);
+  document.getElementById("analyze-counter").addEventListener("click", analyzeCounter);
   document.getElementById("analyze-team").addEventListener("click", analyzeTeam);
 </script>
 </body>
