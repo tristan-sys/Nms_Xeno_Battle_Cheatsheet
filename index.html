@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Xeno Arena Guide</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -604,3 +610,415 @@
     }
   }
 </style>
+</head>
+<body>
+
+<header>
+  <h1>Xeno Arena Guide</h1>
+  <p>No Man's Sky — Update 6.3</p>
+</header>
+
+<nav>
+  <button class="active" onclick="tab('battles',this)">How to Battle</button>
+  <button onclick="tab('affinities',this)">Affinities</button>
+  <button onclick="tab('stats',this)">Stats & Tiers</button>
+  <button onclick="tab('moves',this)">Move Catalog</button>
+  <button onclick="tab('breeding',this)">Breeding</button>
+  <button onclick="tab('team',this)">Team Builder</button>
+</nav>
+
+<main>
+
+<!-- HOW TO BATTLE -->
+<div id="tab-battles" class="tab active">
+  <h2>How Holo-Battles Work</h2>
+  <p class="subtitle">Rules, locations, and how a match plays out</p>
+
+  <h3>The Basics</h3>
+  <div class="grid">
+    <div class="card">
+      <div class="card-title">Format</div>
+      <p>3v3 turn-based. One active creature per side at a time. Knock out all 3 enemy creatures to win. Pets take no real damage — fully healed after every match.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Your Turn Options</div>
+      <p><strong>Use ability</strong> — pick 1 of 5 moves (powerful ones have cooldowns)<br><strong>Swap creature</strong> — switch to a teammate mid-battle<br><strong>Surrender</strong> — forfeit</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Turn Order</div>
+      <p>The creature with the <strong>highest Agility</strong> acts first. Creatures can randomly <strong>dodge</strong>, land <strong>crits</strong>, or get <strong>bonus moves</strong>.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Before the Match</div>
+      <p>Pick your 3 creatures and order <strong>before the fight</strong>. You can inspect the opponent's team first — plan your counters around what you see.</p>
+    </div>
+  </div>
+
+  <h3>Battle Flow</h3>
+  <div class="card">
+    <div class="steps">
+      <div class="step"><p>Inspect the enemy team's affinities</p></div>
+      <div class="step"><p>Pick your 3 creatures and their starting order</p></div>
+      <div class="step"><p>Highest Agility creature goes first</p></div>
+      <div class="step"><p>Pick an ability — watch cooldowns on strong moves</p></div>
+      <div class="step"><p>Swap to a teammate if the matchup is bad</p></div>
+      <div class="step"><p>Last team standing wins</p></div>
+    </div>
+  </div>
+
+  <h3>Where to Find Arenas</h3>
+  <div class="card"><div class="card-title">🌀 Space Anomaly</div><p>Main hub. Talk to <strong>Iteration: Oceanus</strong> for the tutorial and the daily challenge (same for every player worldwide). Also where PvP multiplayer happens.</p></div>
+  <div class="card"><div class="card-title">🚀 Space Stations</div><p>Near mission and trade terminals. NPCs here are <strong>system champions</strong> — harder but give better nanite rewards.</p></div>
+  <div class="card"><div class="card-title">🏘 Settlements & Trade Outposts</div><p>Seating areas near NPC clusters. Easier opponents, great for leveling new creatures. Their teams are built from local planet fauna.</p></div>
+  <div class="card"><div class="card-title">🏗 Your Own Arena</div><p>Buildable at your base. Open it to other travellers, host tournaments, or challenge friends.</p></div>
+
+  <div class="tip">Daily tip: Oceanus resets every day. The puzzle is the same for all players — check the NMS community online if you're stuck.</div>
+</div>
+
+<!-- AFFINITIES -->
+<div id="tab-affinities" class="tab">
+  <h2>Affinity System</h2>
+  <p class="subtitle">Each creature's element is set by the biome of the planet it came from</p>
+
+  <div class="tip">Before each fight, inspect the enemy team. Deploy creatures that counter their affinity. You can also swap mid-battle to get a better matchup.</div>
+
+  <table>
+    <thead><tr><th>Affinity</th><th>Planet Biome</th><th>Beats</th><th>Loses To</th></tr></thead>
+    <tbody>
+      <tr><td><span class="badge fire">🔥 Fire</span></td><td>Volcanic / Hot</td><td><span class="badge frost">❄ Frost</span></td><td><span class="badge radioactive">☢ Radioactive</span></td></tr>
+      <tr><td><span class="badge frost">❄ Frost</span></td><td>Frozen / Icy</td><td><span class="badge desert">🏜 Desert</span></td><td><span class="badge fire">🔥 Fire</span></td></tr>
+      <tr><td><span class="badge radioactive">☢ Radioactive</span></td><td>Irradiated</td><td><span class="badge fire">🔥 Fire</span></td><td><span class="badge toxic">☠ Toxic</span></td></tr>
+      <tr><td><span class="badge toxic">☠ Toxic</span></td><td>Toxic / Poison</td><td><span class="badge tropical">🌿 Tropical</span></td><td><span class="badge radioactive">☢ Radioactive</span></td></tr>
+      <tr><td><span class="badge tropical">🌿 Tropical</span></td><td>Lush / Tropical</td><td><span class="badge mechanical">⚙ Mechanical</span></td><td><span class="badge toxic">☠ Toxic</span></td></tr>
+      <tr><td><span class="badge mechanical">⚙ Mechanical</span></td><td>Robotic creatures</td><td><span class="badge toxic">☠ Toxic</span></td><td><span class="badge anomalous">🌀 Anomalous</span></td></tr>
+      <tr><td><span class="badge anomalous">🌀 Anomalous</span></td><td>Exotic / Weird</td><td><span class="badge mechanical">⚙ Mechanical</span></td><td><span class="badge desert">🏜 Desert</span></td></tr>
+      <tr><td><span class="badge desert">🏜 Desert</span></td><td>Desert / Barren</td><td><span class="badge radioactive">☢ Radioactive</span></td><td><span class="badge frost">❄ Frost</span></td></tr>
+    </tbody>
+  </table>
+
+  <h3>The Two Loops</h3>
+  <p style="color:#666;font-size:13px;margin-bottom:10px">Arrow = beats. The 8 affinities form two separate chains.</p>
+  <div class="chain">
+    <span class="badge fire">🔥 Fire</span><span class="chain-arrow">→</span>
+    <span class="badge frost">❄ Frost</span><span class="chain-arrow">→</span>
+    <span class="badge desert">🏜 Desert</span><span class="chain-arrow">→</span>
+    <span class="badge radioactive">☢ Radioactive</span><span class="chain-arrow">→</span>
+    <span class="badge fire">🔥 Fire</span>
+  </div>
+  <div class="chain">
+    <span class="badge toxic">☠ Toxic</span><span class="chain-arrow">→</span>
+    <span class="badge tropical">🌿 Tropical</span><span class="chain-arrow">→</span>
+    <span class="badge mechanical">⚙ Mech</span><span class="chain-arrow">↔</span>
+    <span class="badge anomalous">🌀 Anomalous</span>
+    <span style="color:#555;font-size:12px;margin-left:6px">(these two counter each other)</span>
+  </div>
+</div>
+
+<!-- STATS & TIERS -->
+<div id="tab-stats" class="tab">
+  <h2>Stats & Tiers</h2>
+  <p class="subtitle">Understanding your creature's numbers and how to improve them</p>
+
+  <h3>The 3 Stats</h3>
+  <div class="card"><div class="card-title">⚔ Combat Effectiveness</div><p>Raw damage output. Controls how hard offensive abilities hit — attacks, DoTs, combos. Prioritize this for an aggressive playstyle.</p></div>
+  <div class="card"><div class="card-title">⚡ Agility</div><p>Does two things: determines <strong>who goes first</strong> each turn (highest goes first), and gives a chance for incoming attacks to <strong>miss</strong>. Fast creatures can dominate by acting first every round.</p></div>
+  <div class="card"><div class="card-title">❤ Health</div><p>How much damage the creature can take before being knocked out. Larger creatures tend to have more HP but are easier to target. Good for tank-style play.</p></div>
+  <div class="card"><div class="card-title">🧠 Personality & Size</div><p>Personality affects battle behavior (aggressive vs defensive decisions). Physical size affects durability and how easy the creature is to hit.</p></div>
+
+  <h3>Tier System</h3>
+  <div class="card">
+    <div class="tier-row"><span class="tier-letter s">S</span><div class="tier-info"><strong>Legendary.</strong> Best possible stats. Rare — found on uncommon biome planets. Worth investing all upgrade resources into.</div></div>
+    <div class="tier-row"><span class="tier-letter a">A</span><div class="tier-info"><strong>Excellent.</strong> Strong stats. Fully competitive, especially with type advantages. Can beat S-tier with good strategy.</div></div>
+    <div class="tier-row"><span class="tier-letter b">B</span><div class="tier-info"><strong>Solid.</strong> Good for most NPC fights. Will struggle against maxed S-tier opponents in PvP.</div></div>
+    <div class="tier-row"><span class="tier-letter c">C</span><div class="tier-info"><strong>Beginner.</strong> Starting point. Upgradeable through XP mutations and Retroviral Pellets.</div></div>
+  </div>
+  <div class="tip">You can't skip tiers — complete one before the next unlocks. Decide which creature to invest in before spending Retroviral Pellets.</div>
+
+  <h3>How to Upgrade</h3>
+  <div class="grid">
+    <div class="card"><div class="card-title">XP Mutations (Free)</div><p>Every battle gives XP. Accumulate enough to unlock mutations that boost: move-first chance, dodge rate, HP, and ability power.</p></div>
+    <div class="card"><div class="card-title">Retroviral Pellets (Fast)</div><p>Directly boosts a specific stat. Dropped occasionally from victories. <strong>Summon the creature first</strong> before using one — otherwise it gets wasted.</p></div>
+  </div>
+</div>
+
+<!-- MOVE CATALOG -->
+<div id="tab-moves" class="tab">
+  <h2>Move Catalog</h2>
+  <p class="subtitle">All move types from game data. Each creature gets 5 moves based on species & biome.</p>
+  <div class="search-wrap"><input type="text" placeholder="Search moves..." oninput="filterMoves(this.value)"></div>
+
+  <div class="move-section" id="ms-basic">
+    <div class="move-section-title">Basic Attacks</div>
+    <div class="move" data-search="basic attack normal"><span class="move-name">Basic Attack</span><span class="move-desc">Standard non-typed hit. No elemental advantage or penalty.</span></div>
+    <div class="move" data-search="affinity attack element own type"><span class="move-name">Affinity Attack</span><span class="move-desc">Uses the creature's own affinity for a typed hit. Gets the full damage bonus against weak opponents.</span></div>
+    <div class="move" data-search="typed fire frost radioactive toxic tropical mechanical anomalous desert element"><span class="move-name">Typed Attacks ×8</span><span class="move-desc">One dedicated attack per affinity. Each uses full type matchup rules.</span></div>
+    <div class="move" data-search="wild swing inaccurate miss low accuracy"><span class="move-name">Wild Swing</span><span class="move-desc">Lower hit chance, but both a normal and affinity version exist. Can catch cautious players off guard.</span></div>
+  </div>
+
+  <div class="move-section" id="ms-multi">
+    <div class="move-section-title">Multi-Hit & Scaling</div>
+    <div class="move" data-search="barrage triple 3 hit escalating shots"><span class="move-name">Barrage</span><span class="move-desc">Fires 3 affinity projectiles in one turn with escalating power (VeryLight → Light → Medium).</span></div>
+    <div class="move" data-search="ramp ramping stronger each use stack grow"><span class="move-name">Ramp Attack</span><span class="move-desc">Gets stronger every time you use it in a match. Starts weak — becomes devastating in long fights.</span></div>
+    <div class="move" data-search="speed agility scales fast slow enemy"><span class="move-name">Speed Strike ×2</span><span class="move-desc">Scales with Agility. One version powers up with your speed; the other hits harder the faster the enemy is.</span></div>
+    <div class="move" data-search="multi turn 3 round channel charge over time"><span class="move-name">Multi-Turn Attack</span><span class="move-desc">Channels over 3 turns with escalating damage (VeryLight → Medium → Heavy). Opponent can try to shield or interrupt.</span></div>
+  </div>
+
+  <div class="move-section" id="ms-chargeup">
+    <div class="move-section-title">Charge-Up Attacks</div>
+    <div class="move" data-search="charge up wait 1 turn big hit telegraph"><span class="move-name">Chargeup Strike</span><span class="move-desc">Spends one turn charging, then delivers a strong hit. Telegraphed — opponent knows it's coming.</span></div>
+    <div class="move" data-search="double charge 2 turns very heavy strongest nuke"><span class="move-name">Double Chargeup</span><span class="move-desc">Waits two full turns then fires a very heavy attack. Extremely telegraphed but potentially the hardest-hitting move in the game.</span></div>
+  </div>
+
+  <div class="move-section" id="ms-dot">
+    <div class="move-section-title">Damage Over Time & Traps</div>
+    <div class="move" data-search="dot bleed damage over time tick burn poison"><span class="move-name">Affinity DoT</span><span class="move-desc">Applies an elemental damage-over-time effect that ticks each turn for several rounds. Great vs. high-health tanks.</span></div>
+    <div class="move" data-search="bomb delayed explode after turns timer debuff"><span class="move-name">Bomb / Delay Attack</span><span class="move-desc">Plants a timed debuff that explodes for big damage after X turns. Forces opponent to choose: dispel it or eat the hit.</span></div>
+    <div class="move" data-search="dot bomb bleed explode combo both"><span class="move-name">DoT Bomb</span><span class="move-desc">Applies sustained ticking damage AND a delayed burst in one move.</span></div>
+    <div class="move" data-search="dont touch trap explodes dispel punish cleanse"><span class="move-name">Don't Touch (Trap)</span><span class="move-desc">Debuff that explodes if the enemy tries to dispel it. Hard counter to opponents running Cleanse moves.</span></div>
+    <div class="move" data-search="attack dot combo hit and bleed same turn"><span class="move-name">Attack + DoT Combo</span><span class="move-desc">Deals immediate damage AND applies a DoT in the same move. Both a normal and affinity version exist.</span></div>
+  </div>
+
+  <div class="move-section" id="ms-heals">
+    <div class="move-section-title">Heals & Shields</div>
+    <div class="move" data-search="heal instant restore hp self recover"><span class="move-name">Self Heal</span><span class="move-desc">Instantly restores a portion of your creature's HP. Simple and reliable.</span></div>
+    <div class="move" data-search="hot heal over time regenerate regen slow"><span class="move-name">Heal Over Time (HoT)</span><span class="move-desc">Regen effect that slowly heals over several turns. Better total healing than instant but spread out.</span></div>
+    <div class="move" data-search="delayed heal future turns plan ahead pre-heal"><span class="move-name">Delayed Heal</span><span class="move-desc">Sets up a heal that triggers after X turns. Pre-plan recovery before taking incoming hits.</span></div>
+    <div class="move" data-search="shield block protect damage absorb basic full"><span class="move-name">Shield ×2</span><span class="move-desc">Creates a damage-absorbing barrier. Basic shield absorbs limited damage. Full Shield completely blocks all incoming hits until the limit is reached.</span></div>
+    <div class="move" data-search="reflect bounce damage back enemy retaliate mirror"><span class="move-name">Reflect Shield ×2</span><span class="move-desc">Sends damage back to the attacker. Normal version reflects a portion. Full Reflect bounces everything until the shield breaks.</span></div>
+    <div class="move" data-search="absorb shield damage limited fully block all"><span class="move-name">Absorb Shield</span><span class="move-desc">Fully absorbs all incoming hits until the damage limit is reached.</span></div>
+  </div>
+
+  <div class="move-section" id="ms-buffs">
+    <div class="move-section-title">Self Buffs</div>
+    <div class="move" data-search="buff damage increase attack power output boost"><span class="move-name">Buff Damage</span><span class="move-desc">Increases your creature's damage output for a few turns. Stack with high Combat Effectiveness for big burst.</span></div>
+    <div class="move" data-search="buff accuracy hit chance increase land more often"><span class="move-name">Buff Accuracy</span><span class="move-desc">Increases hit chance. Useful against high-Agility enemies who dodge frequently.</span></div>
+    <div class="move" data-search="buff crit critical hit chance bonus damage luck"><span class="move-name">Buff Crit Chance</span><span class="move-desc">Increases critical hit chance. Pair with high Combat Effectiveness for big burst potential.</span></div>
+    <div class="move" data-search="speed up agility buff fast go first priority"><span class="move-name">Speed Up / Buff Agility</span><span class="move-desc">Two versions: one boosts speed for next round; the other permanently raises Agility during the match.</span></div>
+    <div class="move" data-search="buff dodge evasion avoid incoming attacks evade"><span class="move-name">Buff Dodge</span><span class="move-desc">Increases dodge chance. Combine with high Agility to make your creature very hard to hit.</span></div>
+    <div class="move" data-search="burrow 100 percent dodge invincible cannot be hit one round"><span class="move-name">Burrow</span><span class="move-desc">Grants 100% dodge for one full round — cannot be hit. Best used to survive a telegraphed charge-up.</span></div>
+    <div class="move" data-search="reset cooldown refresh cd reuse powerful moves again"><span class="move-name">Reset Cooldowns</span><span class="move-desc">Resets all your ability cooldowns instantly so you can reuse powerful moves right away.</span></div>
+    <div class="move" data-search="dispel cleanse remove debuff cure self clean"><span class="move-name">Self Dispel</span><span class="move-desc">Removes all debuffs from yourself. Counters DoTs, bombs, nerfs — but watch for Don't Touch traps.</span></div>
+  </div>
+
+  <div class="move-section" id="ms-debuffs">
+    <div class="move-section-title">Enemy Debuffs</div>
+    <div class="move" data-search="debuff damage reduce enemy attack lower weaken"><span class="move-name">Debuff Damage</span><span class="move-desc">Reduces the enemy's damage output. Very useful against high-attack S-tier opponents.</span></div>
+    <div class="move" data-search="debuff defense reduce armor hit harder penetrate"><span class="move-name">Debuff Defense</span><span class="move-desc">Reduces enemy defense, making all your hits deal more damage. Stacks well with offensive teams.</span></div>
+    <div class="move" data-search="debuff accuracy reduce hit chance blind miss evade"><span class="move-name">Debuff Accuracy</span><span class="move-desc">Reduces enemy's chance to land attacks. Combines well with Agility buffs.</span></div>
+    <div class="move" data-search="combo debuff damage accuracy both reduce cripple"><span class="move-name">Combo Debuff</span><span class="move-desc">Reduces both accuracy AND damage in one move. Cripples offensive creatures efficiently.</span></div>
+    <div class="move" data-search="purge remove buff enemy hostile dispel strip steal"><span class="move-name">Purge</span><span class="move-desc">Strips all buffs from the enemy. Counter to opponents stacking damage, crit, or speed boosts.</span></div>
+    <div class="move" data-search="change affinity force switch element type flip rare"><span class="move-name">Change Affinity ⚡</span><span class="move-desc">Forces the enemy to change their affinity type. Can completely flip a bad matchup into your favor. Very rare.</span></div>
+    <div class="move" data-search="stun skip turn freeze immobilize stop enemy lock"><span class="move-name">Stun</span><span class="move-desc">Makes the enemy skip their next turn entirely. Cancels active charge-ups.</span></div>
+  </div>
+
+  <div class="move-section" id="ms-risky">
+    <div class="move-section-title">Risky / Advanced</div>
+    <div class="move" data-search="self dot recoil big hit hurt yourself damage tradeoff"><span class="move-name">Self-Dot Strike</span><span class="move-desc">Big hit but applies a DoT to yourself. Use when you can KO the enemy next turn or you have healing support.</span></div>
+    <div class="move" data-search="attack both mutual hit yourself and enemy damage both sides"><span class="move-name">Attack Both</span><span class="move-desc">Damages both the enemy AND your own creature. Good for finishing off a low-health enemy when time is running out.</span></div>
+    <div class="move" data-search="enrage big hit buff enemy crit damage hot empower trade"><span class="move-name">Enrage ×3</span><span class="move-desc">Massive hit that also buffs the enemy — one version gives +Crit, one +Damage, one +HoT. Trade burst for empowering your opponent.</span></div>
+    <div class="move" data-search="sacrifice ko yourself buff protect team selfless martyr"><span class="move-name">Sacrifice ×2</span><span class="move-desc">KOs your own creature to either buff your team's damage or shield the rest of your team. Turn a dying creature into an advantage.</span></div>
+    <div class="move" data-search="revive bring back teammate knocked out dead bench resurrect"><span class="move-name">Revive</span><span class="move-desc">Brings a knocked-out teammate back into the fight. Extremely rare. Can completely change a losing situation.</span></div>
+  </div>
+</div>
+
+<!-- BREEDING -->
+<div id="tab-breeding" class="tab">
+  <h2>Breeding & Egg Modifiers</h2>
+  <p class="subtitle">Feed items via the Neural Calibrator at the Egg Sequencer to shape personality traits</p>
+  <div class="warn">⚠ Always <strong>summon the creature first</strong> before using a Retroviral Pellet — otherwise it gets wasted on the wrong animal.</div>
+
+  <div class="trait-block" style="margin-top:24px">
+    <div class="trait-title">⚔ Aggression</div>
+    <div class="trait-sub">High = more offensively driven in battle. Low = more passive.</div>
+    <div class="trait-cols">
+      <div class="col-plus">
+        <div class="col-title">+ Increases</div>
+        <div class="item">Mordite <span>Harvested Substance</span></div>
+        <div class="item">Salt <span>Aquatic Mineral</span></div>
+        <div class="item">Pugneum <span>Anomalous Material</span></div>
+        <div class="item">Sac Venom <span>Trade Commodity</span></div>
+        <div class="item">Larval Core <span>Monstrosity</span></div>
+        <div class="item">Hadal Core <span>Horrific Sample</span></div>
+      </div>
+      <div class="col-minus">
+        <div class="col-title">− Decreases</div>
+        <div class="item">Nipnip Buds <span>Medicinal Substance</span></div>
+        <div class="item">Geknip <span>Trade Commodity</span></div>
+        <div class="item">Creature Pellets <span>Compressed Nutrients</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="trait-block">
+    <div class="trait-title">🚀 Independence</div>
+    <div class="trait-sub">High = more self-directed decisions in battle.</div>
+    <div class="trait-cols">
+      <div class="col-plus">
+        <div class="col-title">+ Increases</div>
+        <div class="item">Di-hydrogen <span>High Energy Substance</span></div>
+        <div class="item">Starship Launch Fuel <span>Stabilised Fuel</span></div>
+        <div class="item">Di-hydrogen Jelly <span>Life Support Power</span></div>
+      </div>
+      <div class="col-minus">
+        <div class="col-title">− Decreases</div>
+        <div class="item">Sodium <span>Catalytic Element</span></div>
+        <div class="item">Sodium Nitrate <span>Refined Catalyst</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="trait-block">
+    <div class="trait-title">🤝 Helpfulness</div>
+    <div class="trait-sub">May influence team-support tendencies in battle.</div>
+    <div class="trait-cols">
+      <div class="col-plus">
+        <div class="col-title">+ Increases</div>
+        <div class="item">Ferrite Dust <span>Metallic Mineral Extract</span></div>
+        <div class="item">Pure Ferrite <span>Processed Metallic</span></div>
+        <div class="item">Magnetised Ferrite <span>Charged Metallic</span></div>
+        <div class="item">Silicate Powder <span>Abundant Mineral</span></div>
+        <div class="item">Oxygen <span>Liquid Fuel</span></div>
+        <div class="item">Carbon <span>Organic Element</span></div>
+        <div class="item">Condensed Carbon <span>Refined Organic</span></div>
+      </div>
+      <div class="col-minus">
+        <div class="col-title">− Decreases</div>
+        <div class="item">Chromatic Metal <span>Stellar Metal</span></div>
+        <div class="item">Lubricant <span>Agricultural Product</span></div>
+        <div class="item">Faecium <span>Agricultural Substance</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TEAM BUILDER -->
+<div id="tab-team" class="tab">
+  <h2>Team Builder</h2>
+  <p class="subtitle">Pick your 3 creatures' affinities to get a full strategic breakdown</p>
+
+  <div class="slot-row"><span class="slot-num">1</span>
+    <select id="s1"><option value="">— Select affinity —</option><option value="fire">🔥 Fire</option><option value="frost">❄ Frost</option><option value="radioactive">☢ Radioactive</option><option value="toxic">☠ Toxic</option><option value="tropical">🌿 Tropical</option><option value="mechanical">⚙ Mechanical</option><option value="anomalous">🌀 Anomalous</option><option value="desert">🏜 Desert</option></select>
+  </div>
+  <div class="slot-row"><span class="slot-num">2</span>
+    <select id="s2"><option value="">— Select affinity —</option><option value="fire">🔥 Fire</option><option value="frost">❄ Frost</option><option value="radioactive">☢ Radioactive</option><option value="toxic">☠ Toxic</option><option value="tropical">🌿 Tropical</option><option value="mechanical">⚙ Mechanical</option><option value="anomalous">🌀 Anomalous</option><option value="desert">🏜 Desert</option></select>
+  </div>
+  <div class="slot-row"><span class="slot-num">3</span>
+    <select id="s3"><option value="">— Select affinity —</option><option value="fire">🔥 Fire</option><option value="frost">❄ Frost</option><option value="radioactive">☢ Radioactive</option><option value="toxic">☠ Toxic</option><option value="tropical">🌿 Tropical</option><option value="mechanical">⚙ Mechanical</option><option value="anomalous">🌀 Anomalous</option><option value="desert">🏜 Desert</option></select>
+  </div>
+
+  <button class="analyze-btn" onclick="analyze()">Analyze Team →</button>
+
+  <div class="result" id="result">
+    <h3>Balance Score</h3>
+    <div class="score-big" id="score"></div>
+    <div class="score-note">out of 10</div>
+
+    <h3>Your Team Counters</h3>
+    <div class="badges" id="counters"></div>
+
+    <h3>Dangerous Against Your Team</h3>
+    <div class="badges" id="threats"></div>
+
+    <div id="dup-warn" class="warn" style="display:none"></div>
+
+    <h3>Strategy</h3>
+    <div class="reco-box" id="strategy"></div>
+
+    <h3 style="margin-top:16px">Best 4th Creature to Hunt</h3>
+    <div class="reco-box" id="hunt"></div>
+  </div>
+</div>
+
+</main>
+
+<script>
+  function tab(id, btn) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  const AFF = {
+    fire:        { label: '🔥 Fire',        cls: 'fire',        beats: 'frost',       losesTo: 'radioactive', biome: 'volcanic/hot' },
+    frost:       { label: '❄ Frost',        cls: 'frost',       beats: 'desert',      losesTo: 'fire',        biome: 'frozen/icy' },
+    radioactive: { label: '☢ Radioactive',  cls: 'radioactive', beats: 'fire',        losesTo: 'toxic',       biome: 'irradiated' },
+    toxic:       { label: '☠ Toxic',        cls: 'toxic',       beats: 'tropical',    losesTo: 'radioactive', biome: 'toxic/poison' },
+    tropical:    { label: '🌿 Tropical',    cls: 'tropical',    beats: 'mechanical',  losesTo: 'toxic',       biome: 'lush/tropical' },
+    mechanical:  { label: '⚙ Mechanical',  cls: 'mechanical',  beats: 'toxic',       losesTo: 'anomalous',   biome: 'robotic creatures' },
+    anomalous:   { label: '🌀 Anomalous',   cls: 'anomalous',   beats: 'mechanical',  losesTo: 'desert',      biome: 'exotic/weird' },
+    desert:      { label: '🏜 Desert',      cls: 'desert',      beats: 'radioactive', losesTo: 'frost',       biome: 'desert/barren' }
+  };
+
+  function badge(k) {
+    return `<span class="badge ${AFF[k].cls}">${AFF[k].label}</span>`;
+  }
+
+  function analyze() {
+    const v = ['s1','s2','s3'].map(id => document.getElementById(id).value);
+    if (v.some(x => !x)) { alert('Please pick all 3 affinities.'); return; }
+
+    const counters = [...new Set(v.map(a => AFF[a].beats))];
+    const threats  = [...new Set(v.map(a => AFF[a].losesTo))];
+
+    document.getElementById('counters').innerHTML = counters.map(badge).join('');
+    document.getElementById('threats').innerHTML  = threats.map(badge).join('');
+
+    const dupes = v.filter((x,i) => v.indexOf(x) !== i);
+    const dupEl = document.getElementById('dup-warn');
+    if (dupes.length) {
+      dupEl.style.display = '';
+      dupEl.innerHTML = `⚠ Duplicate affinity: multiple <strong>${[...new Set(dupes)].map(k=>AFF[k].label).join(', ')}</strong> — one counter type threatens several of your creatures.`;
+    } else { dupEl.style.display = 'none'; }
+
+    let score = 5;
+    if (new Set(v).size === 3) score += 2; else if (new Set(v).size === 1) score -= 3;
+    if (new Set(counters).size >= 3) score += 2; else if (new Set(counters).size === 2) score += 1;
+    if (threats.filter((x,i) => threats.indexOf(x) !== i).length) score -= 2;
+    score = Math.max(1, Math.min(10, score));
+
+    const scoreEl = document.getElementById('score');
+    scoreEl.textContent = score;
+    scoreEl.style.color = score >= 8 ? '#33ee88' : score >= 5 ? '#ffdd55' : '#ff6644';
+
+    const names = v.map(a => AFF[a].label).join(', ');
+    let strat = '';
+    if (score >= 8) {
+      strat = `<strong>${names}</strong> — well-balanced. Diverse coverage with no single affinity threatening your whole lineup. Lead with your fastest creature to take first-turn control.`;
+    } else if (score >= 5) {
+      strat = `<strong>${names}</strong> — decent, but ${threats.map(k=>AFF[k].label).join(' and ')} can threaten multiple members. Use debuff moves (reduce enemy damage/accuracy) when facing your weak matchup.`;
+    } else {
+      strat = `<strong>${names}</strong> — significant gap. ${threats.map(k=>AFF[k].label).join(' and ')} threaten your whole lineup. Use Burrow (100% dodge) or Sacrifice as emergency options and hunt a counter creature.`;
+    }
+    document.getElementById('strategy').innerHTML = strat;
+
+    const threatSet = new Set(threats);
+    let best = null, bestScore = -1;
+    for (const [k, data] of Object.entries(AFF)) {
+      if (v.includes(k)) continue;
+      let s = 0;
+      if (threatSet.has(data.beats)) s += 3;
+      if (!threatSet.has(data.losesTo)) s += 1;
+      if (s > bestScore) { bestScore = s; best = k; }
+    }
+    document.getElementById('hunt').innerHTML = best
+      ? `${badge(best)} — counters ${badge(AFF[best].beats)}, one of your threat types. Hunt on a <strong>${AFF[best].biome}</strong> planet.`
+      : 'Your current team already has good coverage.';
+
+    document.getElementById('result').classList.add('show');
+    document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function filterMoves(q) {
+    q = q.toLowerCase();
+    document.querySelectorAll('.move').forEach(m => {
+      const text = (m.dataset.search || '') + m.textContent.toLowerCase();
+      m.classList.toggle('hidden', q.length > 0 && !text.includes(q));
+    });
+    document.querySelectorAll('.move-section').forEach(s => {
+      s.style.display = q.length > 0 && !s.querySelectorAll('.move:not(.hidden)').length ? 'none' : '';
+    });
+  }
+</script>
+</body>
+</html>
