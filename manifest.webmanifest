@@ -1,0 +1,17 @@
+{
+  "name": "NMS Xeno Arena Companion",
+  "short_name": "NMS Xeno",
+  "description": "Installable battle assistant for No Man's Sky xeno arena matchups, move planning, and live counter calls.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#edf1ee",
+  "theme_color": "#2f6e62",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NMS Xeno Arena Wiki</title>
+<meta name="theme-color" content="#2f6e62">
+<link rel="manifest" href="./manifest.webmanifest">
+<title>NMS Xeno Arena Companion</title>
 <style>
   :root {
     --bg: #edf1ee;
@@ -736,6 +738,235 @@
     border-top: none;
   }
 
+  .assistant-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+    gap: 14px;
+  }
+
+  .assistant-preview-card,
+  .assistant-panel-card,
+  .assistant-log-card,
+  .recommendation-card {
+    padding: 18px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.82);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.78) inset;
+  }
+
+  .assistant-preview-head,
+  .assistant-inline-head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .assistant-stage {
+    position: relative;
+    margin-top: 14px;
+    min-height: 320px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at top left, rgba(125, 198, 182, 0.22), transparent 32%),
+      linear-gradient(145deg, rgba(21, 52, 47, 0.95), rgba(10, 25, 22, 0.98));
+  }
+
+  .assistant-stage video,
+  .assistant-stage canvas {
+    display: block;
+    width: 100%;
+    min-height: 320px;
+    height: 100%;
+    object-fit: cover;
+    cursor: crosshair;
+  }
+
+  .capture-placeholder {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 15px;
+  }
+
+  .capture-toolbar,
+  .assistant-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 14px;
+  }
+
+  .sample-block,
+  .assistant-block + .assistant-block {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+  }
+
+  .sample-targets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .sample-target-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    padding: 8px 12px;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.74);
+    color: #31403a;
+    cursor: pointer;
+  }
+
+  .sample-target-btn.active {
+    background: var(--accent);
+    border-color: transparent;
+    color: #ffffff;
+    box-shadow: 0 10px 24px rgba(47, 110, 98, 0.18);
+  }
+
+  .assistant-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .assistant-form-grid.three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .toggle-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  .toggle-pill,
+  .move-ready {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #33423d;
+  }
+
+  .toggle-pill {
+    min-height: 40px;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.74);
+    font-size: 14px;
+  }
+
+  .toggle-pill input,
+  .move-ready input {
+    width: 16px;
+    min-height: 16px;
+    height: 16px;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    accent-color: var(--accent);
+  }
+
+  .move-config-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .move-config-card {
+    padding: 14px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.7);
+  }
+
+  .move-config-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .assistant-recommendation-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 14px;
+  }
+
+  .recommendation-card.emphasis {
+    background: linear-gradient(180deg, rgba(47, 110, 98, 0.12), rgba(255, 255, 255, 0.88));
+  }
+
+  .recommendation-card h3 {
+    font-size: 24px;
+    line-height: 1.15;
+    margin-top: 6px;
+  }
+
+  .score-list,
+  .snapshot-list {
+    display: grid;
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  .score-row,
+  .snapshot-item {
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.74);
+  }
+
+  .score-row-top,
+  .snapshot-head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .score-bar {
+    height: 8px;
+    margin-top: 8px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: rgba(24, 32, 28, 0.08);
+  }
+
+  .score-bar span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #9bd8cb 0%, #2f6e62 100%);
+  }
+
+  .app-status {
+    background: rgba(47, 110, 98, 0.08);
+    color: var(--accent-strong);
+  }
+
   .team-score {
     font-size: 40px;
     font-weight: 700;
@@ -751,6 +982,11 @@
 
   @media (max-width: 1100px) {
     .layout {
+      grid-template-columns: 1fr;
+    }
+
+    .assistant-shell,
+    .assistant-recommendation-grid {
       grid-template-columns: 1fr;
     }
 
@@ -784,6 +1020,9 @@
 
     .filters,
     .team-controls,
+    .assistant-form-grid,
+    .assistant-form-grid.three,
+    .move-config-grid,
     .panel-grid,
     .panel-grid.three,
     .slot-grid,
@@ -812,12 +1051,15 @@
   <div class="page">
     <header class="hero">
       <p class="eyebrow">No Man's Sky Companion Field Note</p>
-      <h1>NMS Xeno Arena Wiki</h1>
+      <h1>NMS Xeno Arena Companion</h1>
       <p class="hero-copy">
-        A cleaner one-page redo of the cheat sheet: battle rules, affinities, stats, breeding notes,
-        and a searchable move archive rebuilt from the shared spreadsheet snapshot dated April 28, 2026.
+        An installable xeno arena helper with the full wiki, live matchup tools, move scoring, and a screen-aware battle lane
+        rebuilt from the shared spreadsheet snapshot dated April 28, 2026.
       </p>
       <div class="hero-meta">
+        <a class="hero-link" href="#assistant">
+          Open live assistant
+        </a>
         <a class="hero-link" href="https://docs.google.com/spreadsheets/d/13deM_rR6Lgfe3MleaBWNmruK0QRcO0yQ--r-KwcN7EA/edit?usp=sharing" target="_blank" rel="noreferrer">
           Move sheet
         </a>
@@ -851,6 +1093,7 @@
           <p class="wiki-nav-title">On this page</p>
           <nav class="wiki-nav-links">
             <a href="#overview">Overview</a>
+            <a href="#assistant">Battle Assistant</a>
             <a href="#battle">Battle Basics</a>
             <a href="#affinities">Affinities</a>
             <a href="#stats">Stats &amp; Tiers</a>
@@ -874,8 +1117,8 @@
             <p class="eyebrow">Overview</p>
             <h2>What changed in this redo</h2>
             <p class="section-copy">
-              The old tabbed page is now a wiki flow. You can skim the fundamentals in order, jump straight to the move database,
-              or use the team tool at the end when you want a quick affinity sanity check.
+              The old tabbed page is now a wiki flow plus an actual helper app. You can skim the fundamentals in order,
+              jump straight to the move database, or use the live battle lane when you want next-turn guidance in the middle of a match.
             </p>
           </div>
           <div class="panel-grid three">
@@ -905,6 +1148,240 @@
             <a href="https://github.com/tristan-sys/Nms_Xeno_Battle_Cheatsheet" target="_blank" rel="noreferrer">
               Open the current GitHub repo
             </a>
+          </div>
+        </section>
+
+        <section id="assistant">
+          <div class="section-head">
+            <p class="eyebrow">Battle Assistant</p>
+            <h2>Live screen-aware helper for lineup reads and next-turn calls</h2>
+            <p class="section-copy">
+              This version turns the guide into a proper companion app. Capture the game window, freeze a frame,
+              color-sample affinity icons, load your current five moves, and let the engine rank the strongest move or swap.
+            </p>
+          </div>
+          <div class="callout tip">
+            The browser can read a shared screen and build live recommendations, but it cannot secretly press buttons in the game client.
+            This release is the strongest honest version of an arena assistant: installable, screen-aware, and fast to use mid-match.
+          </div>
+          <div class="assistant-shell">
+            <article class="assistant-preview-card">
+              <div class="assistant-preview-head">
+                <div>
+                  <p class="field-label">Screen reader lane</p>
+                  <p class="small-note">Capture the game, pause a frame, then click the icon area to guess affinity from color.</p>
+                </div>
+                <div class="chip-row">
+                  <span id="capture-status" class="chip app-status">Screen idle</span>
+                  <span id="frame-status" class="chip">Frame not frozen</span>
+                </div>
+              </div>
+              <div class="assistant-stage">
+                <video id="capture-video" autoplay playsinline muted hidden></video>
+                <canvas id="capture-canvas" hidden></canvas>
+                <div id="capture-placeholder" class="capture-placeholder">
+                  Start screen capture and the arena window will appear here.
+                </div>
+              </div>
+              <div class="capture-toolbar">
+                <button id="start-capture" class="primary-btn" type="button">Start capture</button>
+                <button id="freeze-frame" class="ghost-btn" type="button" disabled>Freeze frame</button>
+                <button id="resume-live" class="ghost-btn" type="button" disabled>Resume live</button>
+                <button id="install-app" class="ghost-btn" type="button" hidden>Install app</button>
+                <button id="clear-battle-state" class="ghost-btn" type="button">Reset board</button>
+              </div>
+              <div class="sample-block">
+                <p class="field-label">Frame sample target</p>
+                <div id="sample-targets" class="sample-targets">
+                  <button class="sample-target-btn active" type="button" data-sample-target="enemy-1">Enemy 1</button>
+                  <button class="sample-target-btn" type="button" data-sample-target="enemy-2">Enemy 2</button>
+                  <button class="sample-target-btn" type="button" data-sample-target="enemy-3">Enemy 3</button>
+                  <button class="sample-target-btn" type="button" data-sample-target="enemy-active">Enemy active</button>
+                  <button class="sample-target-btn" type="button" data-sample-target="player-active">Your active</button>
+                </div>
+                <p id="sample-feedback" class="small-note">
+                  Freeze a frame, choose a target, then click the canvas to sample the icon tint.
+                </p>
+              </div>
+            </article>
+
+            <article class="assistant-panel-card">
+              <div class="assistant-block">
+                <p class="field-label">Opponent board</p>
+                <div class="assistant-form-grid">
+                  <label class="field">
+                    <span class="field-label">Enemy 1</span>
+                    <select id="assistant-enemy-one">
+                      <option value="">Select affinity</option>
+                    </select>
+                  </label>
+                  <label class="field">
+                    <span class="field-label">Enemy 2</span>
+                    <select id="assistant-enemy-two">
+                      <option value="">Select affinity</option>
+                    </select>
+                  </label>
+                  <label class="field">
+                    <span class="field-label">Enemy 3</span>
+                    <select id="assistant-enemy-three">
+                      <option value="">Select affinity</option>
+                    </select>
+                  </label>
+                  <label class="field">
+                    <span class="field-label">Enemy active</span>
+                    <select id="assistant-enemy-active">
+                      <option value="">Select affinity</option>
+                    </select>
+                  </label>
+                </div>
+              </div>
+
+              <div class="assistant-block">
+                <p class="field-label">Your board</p>
+                <div class="assistant-form-grid">
+                  <label class="field">
+                    <span class="field-label">Your active</span>
+                    <select id="assistant-our-active">
+                      <option value="">Select affinity</option>
+                    </select>
+                  </label>
+                  <label class="field">
+                    <span class="field-label">Bench 1</span>
+                    <select id="assistant-bench-one">
+                      <option value="">Select affinity</option>
+                    </select>
+                  </label>
+                  <label class="field">
+                    <span class="field-label">Bench 2</span>
+                    <select id="assistant-bench-two">
+                      <option value="">Select affinity</option>
+                    </select>
+                  </label>
+                  <label class="field">
+                    <span class="field-label">Tempo</span>
+                    <select id="assistant-tempo">
+                      <option value="even">Tempo even</option>
+                      <option value="faster">You are faster</option>
+                      <option value="slower">Enemy is faster</option>
+                    </select>
+                  </label>
+                  <label class="field">
+                    <span class="field-label">Your health</span>
+                    <select id="assistant-player-health">
+                      <option value="healthy">Healthy</option>
+                      <option value="chipped">Chipped</option>
+                      <option value="danger">Danger</option>
+                    </select>
+                  </label>
+                  <label class="field">
+                    <span class="field-label">Enemy health</span>
+                    <select id="assistant-enemy-health">
+                      <option value="healthy">Healthy</option>
+                      <option value="chipped">Chipped</option>
+                      <option value="danger">Danger</option>
+                    </select>
+                  </label>
+                </div>
+                <div class="toggle-grid">
+                  <label class="toggle-pill"><input id="assistant-enemy-charging" type="checkbox">Enemy charging</label>
+                  <label class="toggle-pill"><input id="assistant-enemy-shielded" type="checkbox">Enemy shielded</label>
+                  <label class="toggle-pill"><input id="assistant-needs-stabilize" type="checkbox">You need a safe turn</label>
+                </div>
+              </div>
+
+              <div class="assistant-block">
+                <div class="assistant-inline-head">
+                  <div>
+                    <p class="field-label">Current move bar</p>
+                    <p class="small-note">Pick the five moves on your active creature and mark which ones are ready now.</p>
+                  </div>
+                  <button id="apply-ideal-team" class="ghost-btn" type="button">Load ideal trio</button>
+                </div>
+                <div class="move-config-grid">
+                  <article class="move-config-card">
+                    <div class="move-config-top">
+                      <span class="field-label">Slot 1</span>
+                      <label class="move-ready"><input id="assistant-ready-1" type="checkbox" checked>Ready</label>
+                    </div>
+                    <select id="assistant-move-1"></select>
+                  </article>
+                  <article class="move-config-card">
+                    <div class="move-config-top">
+                      <span class="field-label">Slot 2</span>
+                      <label class="move-ready"><input id="assistant-ready-2" type="checkbox" checked>Ready</label>
+                    </div>
+                    <select id="assistant-move-2"></select>
+                  </article>
+                  <article class="move-config-card">
+                    <div class="move-config-top">
+                      <span class="field-label">Slot 3</span>
+                      <label class="move-ready"><input id="assistant-ready-3" type="checkbox" checked>Ready</label>
+                    </div>
+                    <select id="assistant-move-3"></select>
+                  </article>
+                  <article class="move-config-card">
+                    <div class="move-config-top">
+                      <span class="field-label">Slot 4</span>
+                      <label class="move-ready"><input id="assistant-ready-4" type="checkbox" checked>Ready</label>
+                    </div>
+                    <select id="assistant-move-4"></select>
+                  </article>
+                  <article class="move-config-card">
+                    <div class="move-config-top">
+                      <span class="field-label">Slot 5</span>
+                      <label class="move-ready"><input id="assistant-ready-5" type="checkbox" checked>Ready</label>
+                    </div>
+                    <select id="assistant-move-5"></select>
+                  </article>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="assistant-recommendation-grid">
+            <article class="recommendation-card emphasis">
+              <p class="field-label">Best next action</p>
+              <h3 id="assistant-best-action">Waiting on battle state</h3>
+              <p id="assistant-best-action-note" class="small-note" style="margin-top:10px;">
+                Fill the active board state and your move bar to start live recommendations.
+              </p>
+            </article>
+            <article class="recommendation-card">
+              <p class="field-label">Ideal trio into this enemy team</p>
+              <div id="assistant-counter-lineup" class="team-lineup"></div>
+              <p id="assistant-counter-note" class="small-note" style="margin-top:10px;">
+                Add the enemy trio and the app will suggest the cleanest counter shell.
+              </p>
+            </article>
+            <article class="recommendation-card">
+              <p class="field-label">Ranked actions</p>
+              <div id="assistant-ranked-actions" class="score-list">
+                <div class="empty-state">No turn ranking yet.</div>
+              </div>
+            </article>
+            <article class="recommendation-card">
+              <p class="field-label">Turn coaching</p>
+              <p id="assistant-turn-plan">
+                Current coaching will appear here once the board is populated.
+              </p>
+              <div id="assistant-turn-tags" class="chip-row" style="margin-top:10px;"></div>
+            </article>
+          </div>
+
+          <div class="assistant-log-card">
+            <div class="assistant-inline-head">
+              <div>
+                <p class="field-label">Battle snapshots</p>
+                <p class="small-note">Save good reads so you can compare openings, swaps, and move calls between matches.</p>
+              </div>
+              <div class="assistant-actions">
+                <button id="save-snapshot" class="primary-btn" type="button">Save snapshot</button>
+                <button id="clear-snapshots" class="ghost-btn" type="button">Clear history</button>
+              </div>
+            </div>
+            <div id="assistant-snapshot-list" class="snapshot-list">
+              <div class="empty-state">No snapshots saved yet.</div>
+            </div>
           </div>
         </section>
 
@@ -1472,6 +1949,33 @@
   };
 
   const AFFINITY_KEYS = Object.keys(AFFINITIES);
+  const APP_STATE_KEY = "nms-xeno-companion-state-v3";
+  const SNAPSHOT_STATE_KEY = "nms-xeno-companion-snapshots-v1";
+  const SLOT_DEFAULTS = {};
+  const AFFINITY_SAMPLE_COLORS = {
+    fire: [226, 112, 73],
+    frost: [125, 184, 225],
+    radioactive: [149, 180, 66],
+    toxic: [151, 106, 200],
+    tropical: [70, 154, 109],
+    mechanical: [193, 134, 60],
+    anomalous: [187, 84, 133],
+    desert: [200, 169, 71]
+  };
+  const ASSISTANT_TARGETS = {
+    "enemy-1": { inputId: "assistant-enemy-one", label: "Enemy 1" },
+    "enemy-2": { inputId: "assistant-enemy-two", label: "Enemy 2" },
+    "enemy-3": { inputId: "assistant-enemy-three", label: "Enemy 3" },
+    "enemy-active": { inputId: "assistant-enemy-active", label: "Enemy active" },
+    "player-active": { inputId: "assistant-our-active", label: "Your active" }
+  };
+  const assistantSession = {
+    captureStream: null,
+    deferredInstallPrompt: null,
+    frozen: false,
+    sampleTarget: "enemy-1",
+    snapshots: []
+  };
 
   const escapeHtml = (value) => String(value ?? "")
     .replace(/&/g, "&amp;")
@@ -1556,6 +2060,14 @@
   const FILES_ONLY_MOVES = MOVES.filter((move) => move.availability === "files");
   const CREATURE_MOVES = MOVES.filter((move) => move.creature);
   const CATEGORIES = [...new Set(MOVES.map((move) => move.category))];
+  const MOVE_INDEX = Object.fromEntries(MOVES.map((move) => [move.moveId, move]));
+
+  [1, 2, 3, 4, 5].forEach((slot) => {
+    const bestLiveMove = MOVES
+      .filter((move) => move.slot === slot && move.availability === "live")
+      .sort((left, right) => (right.rating ?? -1) - (left.rating ?? -1) || left.moveId.localeCompare(right.moveId))[0];
+    SLOT_DEFAULTS[slot] = bestLiveMove ? bestLiveMove.moveId : "";
+  });
 
   const worthChip = (rating) => {
     const meta = WORTH_META[rating] || { label: "Unknown", className: "worth-0" };
@@ -1621,7 +2133,7 @@
           move.abbreviation ? escapeHtml(move.abbreviation) : "",
           move.fileId ? escapeHtml(move.fileId) : ""
         ].filter(Boolean);
-        noteBits.push(`<div><strong>${bits.join(" · ")}</strong></div>`);
+        noteBits.push(`<div><strong>${bits.join(" | ")}</strong></div>`);
       }
 
       const idBits = [];
@@ -1815,9 +2327,783 @@
       .map(([key, affinity]) => `<option value="${key}">${escapeHtml(affinity.label)}</option>`)
       .join("");
 
-    ["counter-one", "counter-two", "counter-three", "team-one", "team-two", "team-three"].forEach((id) => {
+    [
+      "assistant-enemy-one",
+      "assistant-enemy-two",
+      "assistant-enemy-three",
+      "assistant-enemy-active",
+      "assistant-our-active",
+      "assistant-bench-one",
+      "assistant-bench-two",
+      "counter-one",
+      "counter-two",
+      "counter-three",
+      "team-one",
+      "team-two",
+      "team-three"
+    ].forEach((id) => {
       const select = document.getElementById(id);
       select.innerHTML += options;
+    });
+  };
+
+  const renderAssistantMoveOptions = () => {
+    [1, 2, 3, 4, 5].forEach((slot) => {
+      const select = document.getElementById(`assistant-move-${slot}`);
+      const options = MOVES
+        .filter((move) => move.slot === slot && move.availability === "live")
+        .sort((left, right) => (right.rating ?? -1) - (left.rating ?? -1) || left.moveId.localeCompare(right.moveId))
+        .map((move) => `<option value="${move.moveId}">${escapeHtml(move.moveId)} | ${escapeHtml(move.category)} | ${move.rating}/5 | CD ${escapeHtml(move.cooldownLabel)}</option>`)
+        .join("");
+      select.innerHTML = options;
+    });
+  };
+
+  const loadJsonStorage = (key, fallback) => {
+    try {
+      const raw = window.localStorage.getItem(key);
+      return raw ? JSON.parse(raw) : fallback;
+    } catch (error) {
+      return fallback;
+    }
+  };
+
+  const saveJsonStorage = (key, value) => {
+    try {
+      window.localStorage.setItem(key, JSON.stringify(value));
+    } catch (error) {
+      return;
+    }
+  };
+
+  const assistantInputIds = [
+    "assistant-enemy-one",
+    "assistant-enemy-two",
+    "assistant-enemy-three",
+    "assistant-enemy-active",
+    "assistant-our-active",
+    "assistant-bench-one",
+    "assistant-bench-two",
+    "assistant-tempo",
+    "assistant-player-health",
+    "assistant-enemy-health",
+    "assistant-enemy-charging",
+    "assistant-enemy-shielded",
+    "assistant-needs-stabilize",
+    "assistant-ready-1",
+    "assistant-ready-2",
+    "assistant-ready-3",
+    "assistant-ready-4",
+    "assistant-ready-5",
+    "assistant-move-1",
+    "assistant-move-2",
+    "assistant-move-3",
+    "assistant-move-4",
+    "assistant-move-5"
+  ];
+
+  const setSelectValue = (id, value) => {
+    const element = document.getElementById(id);
+    if (!element) return;
+    if ([...element.options].some((option) => option.value === value)) {
+      element.value = value;
+    }
+  };
+
+  const restoreAssistantState = () => {
+    const stored = loadJsonStorage(APP_STATE_KEY, {});
+
+    assistantInputIds.forEach((id) => {
+      const element = document.getElementById(id);
+      if (!element) return;
+
+      if (element.type === "checkbox") {
+        if (stored[id] == null) {
+          element.checked = /^assistant-ready-/.test(id);
+        } else {
+          element.checked = Boolean(stored[id]);
+        }
+        return;
+      }
+
+      if (/assistant-move-\d/.test(id)) {
+        const slot = Number(id.slice(-1));
+        setSelectValue(id, stored[id] || SLOT_DEFAULTS[slot]);
+        return;
+      }
+
+      if (stored[id]) {
+        setSelectValue(id, stored[id]);
+      }
+    });
+
+    assistantSession.snapshots = loadJsonStorage(SNAPSHOT_STATE_KEY, []);
+  };
+
+  const persistAssistantState = () => {
+    const payload = {};
+
+    assistantInputIds.forEach((id) => {
+      const element = document.getElementById(id);
+      if (!element) return;
+      payload[id] = element.type === "checkbox" ? element.checked : element.value;
+    });
+
+    saveJsonStorage(APP_STATE_KEY, payload);
+  };
+
+  const moveProfile = (move) => {
+    const haystack = `${move.moveId} ${move.description} ${move.note ?? ""}`.toLowerCase();
+    const heal = /heal|hot/.test(haystack);
+    const shield = /shield|reflect|absorb|burrow/.test(haystack);
+    const physical = /physical version|attack_norm|attack_wild/.test(haystack);
+    const stun = /\bstun\b/.test(haystack);
+    const dispel = /hostile_dispel|remove positive/.test(haystack);
+    const cleanse = /self_dispel|remove negative/.test(haystack);
+    const dot = /dot|delay|bomb/.test(haystack);
+    const charge = /chargeup/.test(haystack);
+    const buff = move.category === "Buff" || /increase accuracy|increase crit|increase combat|increase dodge|increase agility/.test(haystack);
+    const control = move.category === "Control" || stun || dispel || cleanse || /decrease|change_affinity/.test(haystack);
+    const risky = /self|sacrifice|heal enemy|increase enemy combat|enemy crit chance/.test(haystack);
+    const directDamage = /\bdeals\b/.test(haystack) && !heal && !shield;
+    const finisher = /heavy|massive/.test(haystack);
+    const setup = buff || charge || /self_reset_cd|change_affinity/.test(haystack);
+    const affinityLinked = (directDamage || dot) && !physical && move.category !== "Recovery";
+
+    return {
+      heal,
+      shield,
+      physical,
+      stun,
+      dispel,
+      cleanse,
+      dot,
+      charge,
+      buff,
+      control,
+      risky,
+      directDamage,
+      finisher,
+      setup,
+      affinityLinked
+    };
+  };
+
+  const readAssistantContext = () => {
+    const enemyTeam = ["assistant-enemy-one", "assistant-enemy-two", "assistant-enemy-three"]
+      .map((id) => document.getElementById(id).value)
+      .filter(Boolean);
+    const enemyActive = document.getElementById("assistant-enemy-active").value;
+    const ourActive = document.getElementById("assistant-our-active").value;
+    const bench = ["assistant-bench-one", "assistant-bench-two"]
+      .map((id) => document.getElementById(id).value)
+      .filter(Boolean);
+    const selectedMoves = [1, 2, 3, 4, 5]
+      .map((slot) => {
+        const moveId = document.getElementById(`assistant-move-${slot}`).value;
+        const move = MOVE_INDEX[moveId];
+        return move ? { move, ready: document.getElementById(`assistant-ready-${slot}`).checked } : null;
+      })
+      .filter(Boolean);
+    const unreadyMoves = selectedMoves.filter((entry) => !entry.ready).length;
+
+    return {
+      enemyTeam,
+      enemyActive,
+      ourActive,
+      bench,
+      tempo: document.getElementById("assistant-tempo").value,
+      playerHealth: document.getElementById("assistant-player-health").value,
+      enemyHealth: document.getElementById("assistant-enemy-health").value,
+      enemyCharging: document.getElementById("assistant-enemy-charging").checked,
+      enemyShielded: document.getElementById("assistant-enemy-shielded").checked,
+      needsStabilize: document.getElementById("assistant-needs-stabilize").checked,
+      selectedMoves,
+      unreadyMoves,
+      currentMatchup: ourActive && enemyActive ? matchupValue(ourActive, enemyActive) : 0
+    };
+  };
+
+  const scoreMoveAction = (move, ready, context) => {
+    if (!move) return null;
+
+    if (!ready) {
+      return {
+        type: "move",
+        short: move.moveId,
+        label: `Use ${move.moveId}`,
+        score: -999,
+        detail: "Not ready",
+        reasons: ["Cooldown is not ready yet."]
+      };
+    }
+
+    const profile = moveProfile(move);
+    const reasons = [];
+    let score = (move.rating ?? 0) * 3 + move.slot;
+
+    if (profile.directDamage) {
+      score += 2;
+      reasons.push("damage is always live");
+    }
+    if (profile.affinityLinked && context.currentMatchup === 2) {
+      score += 4;
+      reasons.push("your active affinity has advantage");
+    }
+    if (profile.affinityLinked && context.currentMatchup === -1) {
+      score -= 3.5;
+      reasons.push("your active affinity is in a bad lane");
+    }
+    if (profile.physical) {
+      score += 1;
+      reasons.push("physical damage stays neutral");
+    }
+    if (profile.dot && context.enemyHealth === "healthy") {
+      score += 3;
+      reasons.push("the dot has time to pay off");
+    }
+    if (profile.dot && context.enemyHealth === "danger") {
+      score -= 1.5;
+    }
+    if (profile.finisher && context.enemyHealth === "danger") {
+      score += 4;
+      reasons.push("enemy is in finish range");
+    }
+    if (profile.heal && context.playerHealth === "danger") {
+      score += 6;
+      reasons.push("you need to stabilize");
+    }
+    if (profile.heal && context.playerHealth === "healthy") {
+      score -= 1;
+    }
+    if (profile.shield && (context.enemyCharging || context.needsStabilize || context.playerHealth === "danger")) {
+      score += 5;
+      reasons.push("defensive timing is good here");
+    }
+    if (profile.buff && context.playerHealth === "healthy" && context.enemyHealth !== "danger") {
+      score += 3;
+      reasons.push("you have room to set up");
+    }
+    if (profile.buff && context.tempo === "faster") {
+      score += 1.5;
+    }
+    if (profile.buff && context.playerHealth === "danger") {
+      score -= 2;
+    }
+    if (profile.control && context.enemyCharging) {
+      score += 3.5;
+      reasons.push("charge turns are punishable");
+    }
+    if (profile.dispel && context.enemyShielded) {
+      score += 4;
+      reasons.push("this strips enemy protection");
+    }
+    if (profile.cleanse && context.needsStabilize) {
+      score += 2;
+      reasons.push("clean reset line");
+    }
+    if (profile.stun) {
+      score += 4;
+      reasons.push("stun is premium tempo");
+    }
+    if (profile.stun && context.tempo === "slower") {
+      score += 2;
+    }
+    if (profile.charge && (context.tempo === "slower" || context.playerHealth === "danger")) {
+      score -= 2.5;
+    }
+    if (move.moveId === "CHANGE_AFFINITY" && context.currentMatchup === -1) {
+      score += 4;
+      reasons.push("type flip can rescue a bad fight");
+    }
+    if (move.moveId === "SELF_RESET_CD" && context.unreadyMoves >= 2) {
+      score += 5;
+      reasons.push("multiple premium tools are offline");
+    }
+    if (move.moveId === "BURROW" && (context.enemyCharging || context.playerHealth === "danger")) {
+      score += 4;
+      reasons.push("single-turn dodge can blank burst");
+    }
+    if (profile.risky && context.playerHealth === "danger") {
+      score -= 5;
+      reasons.push("self-damage risk is too high");
+    }
+    if (context.enemyShielded && profile.directDamage && !profile.dispel && !profile.stun) {
+      score -= 2;
+    }
+    if (context.needsStabilize && profile.directDamage && context.currentMatchup === -1) {
+      score -= 2;
+    }
+    if (profile.setup && context.enemyHealth === "danger") {
+      score -= 1.5;
+    }
+
+    return {
+      type: "move",
+      short: move.moveId,
+      label: `Use ${move.moveId}`,
+      score,
+      detail: reasons.slice(0, 2).join(". ") || `${move.category} line`,
+      reasons
+    };
+  };
+
+  const scoreSwapAction = (affinity, context) => {
+    if (!affinity || affinity === context.ourActive) return null;
+
+    const enemyField = context.enemyTeam.length ? context.enemyTeam : [context.enemyActive].filter(Boolean);
+    const laneScore = context.enemyActive ? matchupValue(affinity, context.enemyActive) : 0;
+    const reasons = [];
+    let score = 7 + scoreAffinityIntoField(affinity, enemyField);
+
+    if (laneScore === 2) {
+      score += 6;
+      reasons.push("bench pivot has direct advantage");
+    } else if (laneScore === 0) {
+      score += 1;
+      reasons.push("bench pivot stays neutral");
+    } else if (laneScore === -1) {
+      score -= 4;
+      reasons.push("bench pivot walks into pressure");
+    }
+
+    if (context.currentMatchup === -1) {
+      score += 2.5;
+      reasons.push("your current lane is losing");
+    }
+    if (context.playerHealth === "danger") {
+      score += 2;
+      reasons.push("saving the active creature matters");
+    }
+    if (context.needsStabilize && laneScore === 2) {
+      score += 1.5;
+    }
+
+    return {
+      type: "swap",
+      short: `Swap ${AFFINITIES[affinity].label}`,
+      label: `Swap to ${AFFINITIES[affinity].label}`,
+      score,
+      detail: reasons.slice(0, 2).join(". ") || "Bench pivot",
+      reasons
+    };
+  };
+
+  const recommendBattleAction = (context) => {
+    const actions = [];
+
+    context.selectedMoves.forEach(({ move, ready }) => {
+      const action = scoreMoveAction(move, ready, context);
+      if (action) actions.push(action);
+    });
+
+    context.bench.forEach((affinity) => {
+      const action = scoreSwapAction(affinity, context);
+      if (action) actions.push(action);
+    });
+
+    actions.sort((left, right) => right.score - left.score || left.label.localeCompare(right.label));
+    return actions;
+  };
+
+  const actionTags = (context, bestAction) => {
+    const tags = [];
+    if (context.currentMatchup === 2) tags.push("Affinity edge");
+    if (context.currentMatchup === -1) tags.push("Bad lane");
+    if (context.enemyCharging) tags.push("Charge punish");
+    if (context.enemyShielded) tags.push("Enemy protected");
+    if (context.playerHealth === "danger") tags.push("Low health");
+    if (bestAction?.type === "swap") tags.push("Pivot turn");
+    return [...new Set(tags)];
+  };
+
+  const coachingCopy = (context, bestAction) => {
+    if (!bestAction) {
+      return "Current coaching will appear here once the board is populated.";
+    }
+
+    if (bestAction.type === "swap") {
+      return `The current active lane is shaky. Pivot to ${bestAction.label.replace("Swap to ", "")} before spending more cooldowns, then resume pressure from the better matchup.`;
+    }
+
+    const move = MOVE_INDEX[bestAction.short];
+    const profile = move ? moveProfile(move) : null;
+
+    if (profile?.heal || profile?.shield) {
+      return "This is a stabilization turn. Buy room first, then cash in your better damage line once the board stops threatening an immediate punish.";
+    }
+    if (profile?.buff || profile?.charge || profile?.setup) {
+      return "You have enough space to invest in future pressure. Take the setup turn now so the follow-up swing is harder to answer.";
+    }
+    if (profile?.stun || profile?.control) {
+      return "Tempo matters more than raw damage here. Break the enemy rhythm first, then use your next turn to cash the advantage in.";
+    }
+    return "This is the cleanest pressure line right now. Spend the turn on direct progress and keep your swap option for the first sign the lane flips.";
+  };
+
+  const scoreWidth = (score) => {
+    const normalized = Math.max(6, Math.min(100, Math.round(((score + 8) / 30) * 100)));
+    return `${normalized}%`;
+  };
+
+  const syncCounterMakerFromAssistant = (enemyTeam) => {
+    ["counter-one", "counter-two", "counter-three"].forEach((id, index) => {
+      const nextValue = enemyTeam[index] || "";
+      document.getElementById(id).value = nextValue;
+    });
+
+    if (enemyTeam.length === 3) {
+      analyzeCounter();
+    }
+  };
+
+  const renderAssistantSnapshots = () => {
+    const list = document.getElementById("assistant-snapshot-list");
+
+    if (!assistantSession.snapshots.length) {
+      list.innerHTML = '<div class="empty-state">No snapshots saved yet.</div>';
+      return;
+    }
+
+    list.innerHTML = assistantSession.snapshots.map((snapshot) => `
+      <article class="snapshot-item">
+        <div class="snapshot-head">
+          <strong>${escapeHtml(snapshot.bestAction)}</strong>
+          <span class="small-note">${escapeHtml(snapshot.time)}</span>
+        </div>
+        <div class="chip-row" style="margin-top:10px;">
+          ${snapshot.enemyTeam.map(affinityBadge).join("")}
+        </div>
+        <p class="small-note" style="margin-top:10px;">Enemy active: ${escapeHtml(snapshot.enemyActive || "Unknown")} | You: ${escapeHtml(snapshot.ourActive || "Unknown")}</p>
+      </article>
+    `).join("");
+  };
+
+  const updateAssistantRecommendation = () => {
+    const context = readAssistantContext();
+    const actions = recommendBattleAction(context);
+    const bestAction = actions[0] || null;
+    const enemyTeam = context.enemyTeam;
+
+    persistAssistantState();
+    syncCounterMakerFromAssistant(enemyTeam);
+
+    if (enemyTeam.length === 3) {
+      const plan = recommendCounterTeam(enemyTeam);
+      const leadSeed = context.enemyActive || enemyTeam[0];
+      const leadAffinity = leadSeed ? bestCounterForEnemy(plan.teamValues, leadSeed, enemyTeam) : plan.teamValues[0];
+      const orderedPlan = [leadAffinity, ...plan.teamValues.filter((affinity) => affinity !== leadAffinity)];
+
+      document.getElementById("assistant-counter-lineup").innerHTML = orderedPlan.map(affinityBadge).join("");
+      document.getElementById("assistant-counter-note").textContent =
+        `Best shell into this trio: ${orderedPlan.map((affinity) => AFFINITIES[affinity].label).join(", ")}. Lead ${AFFINITIES[leadAffinity].label} into ${AFFINITIES[leadSeed].label}.`;
+    } else {
+      document.getElementById("assistant-counter-lineup").innerHTML = "";
+      document.getElementById("assistant-counter-note").textContent =
+        "Add the enemy trio and the app will suggest the cleanest counter shell.";
+    }
+
+    if (!context.enemyActive || !context.ourActive || !context.selectedMoves.length) {
+      document.getElementById("assistant-best-action").textContent = "Waiting on battle state";
+      document.getElementById("assistant-best-action-note").textContent =
+        "Fill the active board state and your move bar to start live recommendations.";
+      document.getElementById("assistant-ranked-actions").innerHTML = '<div class="empty-state">No turn ranking yet.</div>';
+      document.getElementById("assistant-turn-plan").textContent =
+        "Current coaching will appear here once the board is populated.";
+      document.getElementById("assistant-turn-tags").innerHTML = "";
+      assistantSession.latestRecommendation = null;
+      return;
+    }
+
+    document.getElementById("assistant-best-action").textContent = bestAction ? bestAction.label : "No action found";
+    document.getElementById("assistant-best-action-note").textContent = bestAction
+      ? bestAction.detail
+      : "No clean action surfaced from the current board state.";
+    document.getElementById("assistant-ranked-actions").innerHTML = actions.slice(0, 6).map((action) => `
+      <div class="score-row">
+        <div class="score-row-top">
+          <strong>${escapeHtml(action.label)}</strong>
+          <span class="chip">${Math.round(action.score * 10) / 10}</span>
+        </div>
+        <div class="small-note">${escapeHtml(action.detail)}</div>
+        <div class="score-bar"><span style="width:${scoreWidth(action.score)};"></span></div>
+      </div>
+    `).join("");
+    document.getElementById("assistant-turn-plan").textContent = coachingCopy(context, bestAction);
+    document.getElementById("assistant-turn-tags").innerHTML = actionTags(context, bestAction)
+      .map((tag) => `<span class="chip">${escapeHtml(tag)}</span>`)
+      .join("");
+
+    assistantSession.latestRecommendation = {
+      context,
+      bestAction
+    };
+  };
+
+  const averageColorAroundPoint = (ctx, x, y, radius = 5) => {
+    const width = Math.min(ctx.canvas.width - Math.max(0, x - radius), radius * 2 + 1);
+    const height = Math.min(ctx.canvas.height - Math.max(0, y - radius), radius * 2 + 1);
+    const startX = Math.max(0, x - radius);
+    const startY = Math.max(0, y - radius);
+    const imageData = ctx.getImageData(startX, startY, width, height).data;
+    let red = 0;
+    let green = 0;
+    let blue = 0;
+    let count = 0;
+
+    for (let index = 0; index < imageData.length; index += 4) {
+      red += imageData[index];
+      green += imageData[index + 1];
+      blue += imageData[index + 2];
+      count += 1;
+    }
+
+    return {
+      red: Math.round(red / count),
+      green: Math.round(green / count),
+      blue: Math.round(blue / count)
+    };
+  };
+
+  const nearestAffinityFromColor = ({ red, green, blue }) => {
+    let bestKey = AFFINITY_KEYS[0];
+    let bestDistance = Number.POSITIVE_INFINITY;
+
+    AFFINITY_KEYS.forEach((key) => {
+      const [targetRed, targetGreen, targetBlue] = AFFINITY_SAMPLE_COLORS[key];
+      const distance = Math.sqrt(
+        ((red - targetRed) ** 2) +
+        ((green - targetGreen) ** 2) +
+        ((blue - targetBlue) ** 2)
+      );
+
+      if (distance < bestDistance) {
+        bestDistance = distance;
+        bestKey = key;
+      }
+    });
+
+    const confidence = Math.max(12, Math.min(99, Math.round(100 - (bestDistance / 4.4))));
+
+    return {
+      key: bestKey,
+      confidence
+    };
+  };
+
+  const updateCaptureStatus = () => {
+    const captureStatus = document.getElementById("capture-status");
+    const frameStatus = document.getElementById("frame-status");
+    captureStatus.textContent = assistantSession.captureStream ? "Screen linked" : "Screen idle";
+    frameStatus.textContent = assistantSession.frozen
+      ? "Frozen frame ready"
+      : assistantSession.captureStream
+        ? "Live preview"
+        : "Frame not frozen";
+
+    document.getElementById("freeze-frame").disabled = !assistantSession.captureStream;
+    document.getElementById("resume-live").disabled = !assistantSession.captureStream || !assistantSession.frozen;
+  };
+
+  const clearCapturePreview = () => {
+    const video = document.getElementById("capture-video");
+    const canvas = document.getElementById("capture-canvas");
+    const placeholder = document.getElementById("capture-placeholder");
+    video.hidden = true;
+    canvas.hidden = true;
+    placeholder.hidden = false;
+    video.srcObject = null;
+    assistantSession.captureStream = null;
+    assistantSession.frozen = false;
+    updateCaptureStatus();
+  };
+
+  const startCapture = async () => {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia) {
+      document.getElementById("sample-feedback").textContent = "Screen capture is not available in this browser context.";
+      return;
+    }
+
+    try {
+      const stream = await navigator.mediaDevices.getDisplayMedia({ video: { cursor: "always" }, audio: false });
+      const video = document.getElementById("capture-video");
+      const canvas = document.getElementById("capture-canvas");
+      const placeholder = document.getElementById("capture-placeholder");
+
+      assistantSession.captureStream = stream;
+      assistantSession.frozen = false;
+      video.srcObject = stream;
+      video.hidden = false;
+      canvas.hidden = true;
+      placeholder.hidden = true;
+
+      stream.getVideoTracks()[0].addEventListener("ended", () => {
+        clearCapturePreview();
+      });
+
+      updateCaptureStatus();
+      document.getElementById("sample-feedback").textContent = "Live capture is running. Freeze a frame before sampling an icon.";
+    } catch (error) {
+      document.getElementById("sample-feedback").textContent = "Screen capture was cancelled or blocked.";
+    }
+  };
+
+  const freezeCurrentFrame = () => {
+    if (!assistantSession.captureStream) return;
+
+    const video = document.getElementById("capture-video");
+    const canvas = document.getElementById("capture-canvas");
+    const placeholder = document.getElementById("capture-placeholder");
+
+    if (!video.videoWidth || !video.videoHeight) {
+      document.getElementById("sample-feedback").textContent = "Wait for the live preview to start before freezing a frame.";
+      return;
+    }
+
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    const ctx = canvas.getContext("2d", { willReadFrequently: true });
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    assistantSession.frozen = true;
+    video.hidden = true;
+    canvas.hidden = false;
+    placeholder.hidden = true;
+    updateCaptureStatus();
+    document.getElementById("sample-feedback").textContent = "Frame frozen. Click the canvas to sample an icon tint.";
+  };
+
+  const resumeLivePreview = () => {
+    if (!assistantSession.captureStream) return;
+    assistantSession.frozen = false;
+    document.getElementById("capture-video").hidden = false;
+    document.getElementById("capture-canvas").hidden = true;
+    document.getElementById("capture-placeholder").hidden = true;
+    updateCaptureStatus();
+    document.getElementById("sample-feedback").textContent = "Live preview resumed.";
+  };
+
+  const setSampleTarget = (targetKey) => {
+    assistantSession.sampleTarget = targetKey;
+    document.querySelectorAll("[data-sample-target]").forEach((button) => {
+      button.classList.toggle("active", button.dataset.sampleTarget === targetKey);
+    });
+  };
+
+  const sampleAffinityFromCanvas = (event) => {
+    if (!assistantSession.frozen) return;
+
+    const canvas = document.getElementById("capture-canvas");
+    if (canvas.hidden) return;
+
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    const x = Math.max(0, Math.min(canvas.width - 1, Math.round((event.clientX - rect.left) * scaleX)));
+    const y = Math.max(0, Math.min(canvas.height - 1, Math.round((event.clientY - rect.top) * scaleY)));
+    const ctx = canvas.getContext("2d", { willReadFrequently: true });
+    const sample = averageColorAroundPoint(ctx, x, y);
+    const match = nearestAffinityFromColor(sample);
+    const target = ASSISTANT_TARGETS[assistantSession.sampleTarget];
+
+    if (target) {
+      document.getElementById(target.inputId).value = match.key;
+      document.getElementById("sample-feedback").textContent =
+        `${target.label} sampled as ${AFFINITIES[match.key].label} with ${match.confidence}% confidence.`;
+      updateAssistantRecommendation();
+    }
+  };
+
+  const applyIdealCounterTeam = () => {
+    const context = readAssistantContext();
+    if (context.enemyTeam.length !== 3) {
+      document.getElementById("assistant-best-action-note").textContent =
+        "Fill all three enemy slots before loading the ideal trio.";
+      return;
+    }
+
+    const plan = recommendCounterTeam(context.enemyTeam);
+    const leadSeed = context.enemyActive || context.enemyTeam[0];
+    const leadAffinity = bestCounterForEnemy(plan.teamValues, leadSeed, context.enemyTeam);
+    const orderedPlan = [leadAffinity, ...plan.teamValues.filter((affinity) => affinity !== leadAffinity)];
+
+    document.getElementById("assistant-our-active").value = orderedPlan[0] || "";
+    document.getElementById("assistant-bench-one").value = orderedPlan[1] || "";
+    document.getElementById("assistant-bench-two").value = orderedPlan[2] || "";
+    updateAssistantRecommendation();
+  };
+
+  const saveBattleSnapshot = () => {
+    const latest = assistantSession.latestRecommendation;
+    if (!latest || !latest.bestAction) return;
+
+    const now = new Date();
+    const snapshot = {
+      time: now.toLocaleString(),
+      enemyTeam: latest.context.enemyTeam,
+      enemyActive: latest.context.enemyActive ? AFFINITIES[latest.context.enemyActive].label : "",
+      ourActive: latest.context.ourActive ? AFFINITIES[latest.context.ourActive].label : "",
+      bestAction: latest.bestAction.label
+    };
+
+    assistantSession.snapshots = [snapshot, ...assistantSession.snapshots].slice(0, 8);
+    saveJsonStorage(SNAPSHOT_STATE_KEY, assistantSession.snapshots);
+    renderAssistantSnapshots();
+  };
+
+  const clearBattleState = () => {
+    [
+      "assistant-enemy-one",
+      "assistant-enemy-two",
+      "assistant-enemy-three",
+      "assistant-enemy-active",
+      "assistant-our-active",
+      "assistant-bench-one",
+      "assistant-bench-two"
+    ].forEach((id) => {
+      document.getElementById(id).value = "";
+    });
+
+    document.getElementById("assistant-tempo").value = "even";
+    document.getElementById("assistant-player-health").value = "healthy";
+    document.getElementById("assistant-enemy-health").value = "healthy";
+    document.getElementById("assistant-enemy-charging").checked = false;
+    document.getElementById("assistant-enemy-shielded").checked = false;
+    document.getElementById("assistant-needs-stabilize").checked = false;
+    [1, 2, 3, 4, 5].forEach((slot) => {
+      document.getElementById(`assistant-ready-${slot}`).checked = true;
+      document.getElementById(`assistant-move-${slot}`).value = SLOT_DEFAULTS[slot];
+    });
+    updateAssistantRecommendation();
+  };
+
+  const clearSnapshots = () => {
+    assistantSession.snapshots = [];
+    saveJsonStorage(SNAPSHOT_STATE_KEY, assistantSession.snapshots);
+    renderAssistantSnapshots();
+  };
+
+  const registerInstallPrompt = () => {
+    const installButton = document.getElementById("install-app");
+
+    window.addEventListener("beforeinstallprompt", (event) => {
+      event.preventDefault();
+      assistantSession.deferredInstallPrompt = event;
+      installButton.hidden = false;
+    });
+
+    installButton.addEventListener("click", async () => {
+      if (!assistantSession.deferredInstallPrompt) return;
+      assistantSession.deferredInstallPrompt.prompt();
+      await assistantSession.deferredInstallPrompt.userChoice.catch(() => null);
+      assistantSession.deferredInstallPrompt = null;
+      installButton.hidden = true;
+    });
+  };
+
+  const registerServiceWorker = () => {
+    if (!("serviceWorker" in navigator)) return;
+    navigator.serviceWorker.register("./sw.js").catch(() => {
+      return;
     });
   };
 
@@ -1951,6 +3237,13 @@
   renderFeatured();
   renderCreatureCards();
   renderAffinityOptions();
+  renderAssistantMoveOptions();
+  restoreAssistantState();
+  renderAssistantSnapshots();
+  registerInstallPrompt();
+  registerServiceWorker();
+  updateCaptureStatus();
+  updateAssistantRecommendation();
   setupScrollNav();
 
   ["filter-search", "filter-slot", "filter-worth", "filter-category", "filter-status"].forEach((id) => {
@@ -1958,7 +3251,28 @@
     document.getElementById(id).addEventListener("change", renderMoveTable);
   });
 
+  assistantInputIds.forEach((id) => {
+    const element = document.getElementById(id);
+    const eventName = element.type === "checkbox" ? "change" : "input";
+    element.addEventListener(eventName, updateAssistantRecommendation);
+    if (eventName !== "change") {
+      element.addEventListener("change", updateAssistantRecommendation);
+    }
+  });
+
+  document.querySelectorAll("[data-sample-target]").forEach((button) => {
+    button.addEventListener("click", () => setSampleTarget(button.dataset.sampleTarget));
+  });
+
   document.getElementById("clear-filters").addEventListener("click", clearFilters);
+  document.getElementById("start-capture").addEventListener("click", startCapture);
+  document.getElementById("freeze-frame").addEventListener("click", freezeCurrentFrame);
+  document.getElementById("resume-live").addEventListener("click", resumeLivePreview);
+  document.getElementById("capture-canvas").addEventListener("click", sampleAffinityFromCanvas);
+  document.getElementById("clear-battle-state").addEventListener("click", clearBattleState);
+  document.getElementById("apply-ideal-team").addEventListener("click", applyIdealCounterTeam);
+  document.getElementById("save-snapshot").addEventListener("click", saveBattleSnapshot);
+  document.getElementById("clear-snapshots").addEventListener("click", clearSnapshots);
   document.getElementById("analyze-counter").addEventListener("click", analyzeCounter);
   document.getElementById("analyze-team").addEventListener("click", analyzeTeam);
 </script>
